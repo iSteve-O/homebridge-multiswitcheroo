@@ -6,7 +6,7 @@ let Service, Characteristic;
 module.exports = (homebridge) => {
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
-  homebridge.registerAccessory('homebridge-switcheroo', 'Switcheroo', Switcheroo);
+  homebridge.registerAccessory('homebridge-multiswitcheroo', 'Switcheroo', Switcheroo);
 };
 
 class Switcheroo {
@@ -153,6 +153,6 @@ class MultiSwitcheroo extends Switcheroo {
 module.exports = (homebridge) => {
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
-  homebridge.registerAccessory('homebridge-switcheroo', 'Switcheroo', Switcheroo);
-  homebridge.registerAccessory('homebridge-switcheroo', 'MultiSwitcheroo', MultiSwitcheroo);
+  homebridge.registerAccessory('homebridge-multiswitcheroo', 'Switcheroo', Switcheroo);
+  homebridge.registerAccessory('homebridge-multiswitcheroo', 'MultiSwitcheroo', MultiSwitcheroo);
 };
