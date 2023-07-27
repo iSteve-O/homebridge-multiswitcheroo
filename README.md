@@ -1,3 +1,7 @@
+<p align="center">
+  <a href="https://homebridge.io"><img src="https://raw.githubusercontent.com/homebridge/branding/master/logos/homebridge-color-round-stylized.png" height="140"></a>
+</p>
+
 # Homebridge-MultiSwitcheroo
 User defined switches for http requests. Simple on/off or multiswitch devices. Useful for lights, A/V systems, home automation, and includes live status polling & parsing custom responses!
 
