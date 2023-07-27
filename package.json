@@ -1,10 +1,10 @@
 {
   "name": "homebridge-multiswitcheroo",
-  "version": "10.0.1",
+  "version": "1.0.1",
   "author": "iSteve-O",
-  "description": "User defined switches for http requests. Simple on/off or multiswitch radio buttons. Useful for lights, A/V systems, home automation, whatever",
+  "description": "User defined switches for http requests. Simple on/off or multiswitch on/off. Useful for lights, A/V systems, home automation, and includes live status polling!",
   "license": "MIT",
-  "homepage": "https://github.com/iSteve-O/homebridge-multiswitcheroo/blob/master/README.md",
+  "homepage": "https://github.com/iSteve-O/homebridge-multiswitcheroo",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iSteve-O/homebridge-multiswitcheroo.git"
