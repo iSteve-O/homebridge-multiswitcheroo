@@ -18,7 +18,8 @@
     "button",
     "http",
     "control",
-    "homekit", 
+    "homekit",
+    "switcheroo",
     "smarthome"
   ],
   "main": "index.js",
