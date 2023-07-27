@@ -1,6 +1,7 @@
 {
   "name": "homebridge-multiswitcheroo",
-  "version": "1.0.1",
+  "displayName": "MultiSwitcheroo",
+  "version": "1.0.2",
   "author": "iSteve-O",
   "description": "User defined switches for http requests. Simple on/off or multiswitch on/off. Useful for lights, A/V systems, home automation, and includes live status polling!",
   "license": "MIT",
