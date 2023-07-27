@@ -1,12 +1,25 @@
 # Homebridge-MultiSwitcheroo
-User defined switches for http requests. Simple on/off or multiswitch radio buttons. Useful for lights, A/V systems, home automation, and includes live status!
+User defined switches for http requests. Simple on/off or multiswitch devices. Useful for lights, A/V systems, home automation, and includes live status polling & parsing custom responses!
 
 
 ## Switch Types
 
 ### Switch (standard on/off)
 Meant to be used as a simple on/off switch. 
- ==> light, projector, fan, etc.
+ ==> api accessible light, outlet, fan, etc.
+
+ Define your `Switcheroo` with whatever `name` you want to appear in the home app. 
+
+Then, set the appropriate `statusUrl` to call for the status at the set `pollingInterval` (default `3000`).
+
+The `statusPattern` is a regular expression string (regexp) sought in the response from the server to get an accurate status for each switch (see the `Mute` switch in the `MultiSwitcheroo` config example below for a really good example of a complex pattern where an unknown number is present in the string).
+
+Set the `onUrl` & `offUrl` as appropriate. Must be the full URL, including `http://` & port.
+
+The `manufacturer`, `model`, and `serialNumber` are all optional, but it is best to set them. Controller for HomeKit will throw errors about duplicate serial numbers if you have multiple devices using `DEFAULT-SERIAL`. Plus, it's fun to set these with your name!
+
+Currently only built to support the `GET` http method. 
+
 
 ```
 {
@@ -26,8 +39,17 @@ Meant to be used as a simple on/off switch.
 ### Multiswitch (radio buttons)
 Ideally you would use this to set a characteristic like volume. For example, a mute switch, a high, medium & low switch for a Yamaha receiver.
 
-Define your `MultiSwitcheroo` with whatever `name` you want to appear as the main switch title in the home app. This is what is visible if left being displayed as a single tile (default). Then, the appropriate endpoint `statusUrl` to call. Complete http endpoints are constructed as `host` + `path`.
-Currently only built to support one http method `GET`. The status pattern is a regexp in sought in the response from the server.
+Define your `MultiSwitcheroo` with whatever `name` you want to appear as the main switch title in the home app. This is what is visible if left displayed as a single tile (default). The `name` for each switch is what the individual switches should show. Sometimes these transfer to the home app, and sometimes not, so you may have to rename them all once in the home app, but only once. 
+
+Then, set the appropriate `statusUrl` to call for the status at the set `pollingInterval` (default `3000`).
+
+The `statusPattern` is a regular expression string (regexp) sought in the response from the server to get an accurate status for each switch (see the `Mute` switch in the `MultiSwitcheroo` config example below for a really good example of a complex pattern where an unknown number is present in the string).
+
+Set the `onUrl` & `offUrl` as appropriate. Must be the full URL, including `http://` & port.
+
+The `manufacturer`, `model`, and `serialNumber` are all optional, but it is best to set them. Controller for HomeKit will throw errors about duplicate serial numbers if you have multiple devices using `DEFAULT-SERIAL`. 
+
+Currently only built to support the `GET` http method. 
 
 ```
   {
@@ -35,7 +57,7 @@ Currently only built to support one http method `GET`. The status pattern is a r
         "name": "Volume Switch",
         "manufacturer": "Manufacturer",
         "model": "Model",
-        "serialNumber": "VOLUMESW01",
+        "serialNumber": "VOLUMESW01",   // best to specify a SN to avoid conflicts
         "statusUrl": "http://192.168.1.91/YamahaExtendedControl/v1/main/getStatus",
         "pollingInterval": 5000,
         "switches": [
@@ -71,26 +93,29 @@ Currently only built to support one http method `GET`. The status pattern is a r
 
 |        Parameter       |                                     Description                                     | Required |
 | -----------------------| ----------------------------------------------------------------------------------- |:--------:|
-| `name`                 | name of the accessory                                                               |     ✓    |
+| `name`                 | name of the switch or switches                                                      |     ✓    |
 | `accessory`            | `Switcheroo` or `MultiSwitcheroo`                                                   |     ✓    |
 | `statusUrl`            | url for status requests                                                             |     ✓    |
+| `statusPattern`        | regexp sought in `statusUrl` response body                                          |     ✓    |
 | `onUrl`                | endpoint paths for the on state                                                     |     ✓    |
 | `offUrl`               | endpoint paths for the on state                                                     |     ✓    |
-| `pollingInterval`      | interval to poll for status updates in milliseconds                                 |     ✓    |
-| `switches`             | array of switches for `MultiSwitcheroo` devices                                     |     ✓    |
+| `pollingInterval`      | interval to poll for status updates in milliseconds (default 3000ms or 3 seconds)   |     ✓    |
+| `switches`             | array of switches for `MultiSwitcheroo` devices (see axample config)                |     ✓    |
 | `manufacturer`         | will show in Home app description of this Homekit accessory, ex. 'Yamaha'           |          |
-| `model`                | will show in Home app description of this Homekit accessory, ex. 'TSR-700'          |          |
-| `serialNumber`         | will show in Home app description of this Homekit accessory, ex. 'SWITCH01'         |          |
+| `model`                | will show in Home app description of this Homekit accessory, ex. 'Default Model'    |          |
+| `serialNumber`         | will show in Home app description of this Homekit accessory, ex. 'SERIALNUMBER1'    |          |
 
 
 ## Tips
 
-  - Make sure specify a port in the if necessary. (i.e. `"statusUrl" : "http://192.168.0.XXX:2000"`).
+  - Make sure specify the full URL in the `statusURL`. (i.e. `"statusUrl" : "http://192.168.0.XXX:2000"`).
   - Must prepend 'http://' to all URLs.
-  - Verify your server only uses `GET`.
+  - Verify your server only uses `GET`. This plugin only does `GET` requests.
+  - Use this plugin in a child bridge. It's just better.
+  - You can expose multiple switches on the same child bridge, just use the same `_bridge` `username` & `port` in the config.
 
 ## Installation
 
 1. Install homebridge using: `npm install -g homebridge`
-2. Install homebridge-http using: `npm install -g homebridge-http-multiswitcheroo`
+2. Install homebridge-http using: `npm install -g homebridge-multiswitcheroo`
 3. Update your config file
