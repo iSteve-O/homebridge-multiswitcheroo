@@ -1,47 +1,22 @@
-<p align="center">
+<p align="left">
   <a href="https://homebridge.io"><img src="https://raw.githubusercontent.com/homebridge/branding/master/logos/homebridge-color-round-stylized.png" height="140"></a>
 </p>
 
-# Homebridge-MultiSwitcheroo
-User defined switches for http requests. Simple on/off or multiswitch devices. Useful for lights, A/V systems, home automation, and includes live status polling & parsing custom responses!
+# **MultiSwitcheroo**
+
+### homebridge-multiswitcheroo
+
+### User defined switches for http requests. Simple on/off (`Switcheroo`) or multi-switch (`MultiSwitcheroo`) accessories. 
+Useful for lights, A/V systems, home automation, and includes live status polling & parsing custom responses!
+
 
 
 ## Switch Types
 
-### Switch (standard on/off)
-Meant to be used as a simple on/off switch. 
- ==> api accessible light, outlet, fan, etc.
-
- Define your `Switcheroo` with whatever `name` you want to appear in the home app. 
-
-Then, set the appropriate `statusUrl` to call for the status at the set `pollingInterval` (default `3000`).
-
-The `statusPattern` is a regular expression string (regexp) sought in the response from the server to get an accurate status for each switch (see the `Mute` switch in the `MultiSwitcheroo` config example below for a really good example of a complex pattern where an unknown number is present in the string).
-
-Set the `onUrl` & `offUrl` as appropriate. Must be the full URL, including `http://` & port.
-
-The `manufacturer`, `model`, and `serialNumber` are all optional, but it is best to set them. Controller for HomeKit will throw errors about duplicate serial numbers if you have multiple devices using `DEFAULT-SERIAL`. Plus, it's fun to set these with your name!
-
-Currently only built to support the `GET` http method. 
 
 
-```
-{
-        "accessory": "Switcheroo",   // remember this *must* be 'Switcheroo' for single
-        "name": "My Switch",
-        "model": "Model",
-        "manufacturer": "Manufacturer",
-        "serialNumber": "SWITCH01",   // best to specify a SN to avoid conflicts
-        "statusUrl": "http://192.168.0.XXX/myswitch/status",
-        "statusPattern": /1/,
-        "pollingInterval": 3000,
-        "onUrl"  : "http://192.168.0.XXX/myswitch/1",
-        "offUrl" : "http://192.168.0.XXX/myswitch/0"
-}
-```
-
-### Multiswitch (radio buttons)
-Ideally you would use this to set a characteristic like volume. For example, a mute switch, a high, medium & low switch for a Yamaha receiver.
+### Multi-Switch (`MultiSwitcheroo`)
+Ideally, you would use this to set a characteristic, like volume. For example, our config below outlines a single accessory with a mute, high, medium & low switch for a Yamaha receiver's volume.
 
 Define your `MultiSwitcheroo` with whatever `name` you want to appear as the main switch title in the home app. This is what is visible if left displayed as a single tile (default). The `name` for each switch is what the individual switches should show. Sometimes these transfer to the home app, and sometimes not, so you may have to rename them all once in the home app, but only once. 
 
@@ -93,6 +68,42 @@ Currently only built to support the `GET` http method.
   }
 ```
 
+
+
+### Standard Switch (`Switcheroo`)
+Meant to be used as a simple on/off switch. 
+ For example, an api accessible light, outlet, fan, etc.
+
+ Define your `Switcheroo` with whatever `name` you want to appear in the home app. 
+
+Then, set the appropriate `statusUrl` to call for the status at the set `pollingInterval` (default `3000`).
+
+The `statusPattern` is a regular expression string (regexp) sought in the response from the server to get an accurate status for each switch (see the `Mute` switch in the `MultiSwitcheroo` config example below for a really good example of a complex pattern where an unknown number is present in the string).
+
+Set the `onUrl` & `offUrl` as appropriate. Must be the full URL, including `http://` & port.
+
+The `manufacturer`, `model`, and `serialNumber` are all optional, but it is best to set them. Controller for HomeKit will throw errors about duplicate serial numbers if you have multiple devices using `DEFAULT-SERIAL`. Plus, it's fun to set these with your name!
+
+Currently only built to support the `GET` http method. 
+
+
+```
+{
+        "accessory": "Switcheroo",   // remember this *must* be 'Switcheroo' for single
+        "name": "My Switch",
+        "model": "Model",
+        "manufacturer": "Manufacturer",
+        "serialNumber": "SWITCH01",   // best to specify a SN to avoid conflicts
+        "statusUrl": "http://192.168.0.XXX/myswitch/status",
+        "statusPattern": /1/,
+        "pollingInterval": 3000,
+        "onUrl"  : "http://192.168.0.XXX/myswitch/1",
+        "offUrl" : "http://192.168.0.XXX/myswitch/0"
+}
+```
+
+
+
 ## Configuration Params
 
 |        Parameter       |                                     Description                                     | Required |
@@ -102,9 +113,9 @@ Currently only built to support the `GET` http method.
 | `statusUrl`            | url for status requests                                                             |     ✓    |
 | `statusPattern`        | regexp sought in `statusUrl` response body                                          |     ✓    |
 | `onUrl`                | endpoint paths for the on state                                                     |     ✓    |
-| `offUrl`               | endpoint paths for the on state                                                     |     ✓    |
+| `offUrl`               | endpoint paths for the off state                                                    |     ✓    |
 | `pollingInterval`      | interval to poll for status updates in milliseconds (default 3000ms or 3 seconds)   |     ✓    |
-| `switches`             | array of switches for `MultiSwitcheroo` devices (see axample config)                |     ✓    |
+| `switches`             | array of switches required for `MultiSwitcheroo` devices (see axample config)       |     ✓    |
 | `manufacturer`         | will show in Home app description of this Homekit accessory, ex. 'Yamaha'           |          |
 | `model`                | will show in Home app description of this Homekit accessory, ex. 'Default Model'    |          |
 | `serialNumber`         | will show in Home app description of this Homekit accessory, ex. 'SERIALNUMBER1'    |          |
