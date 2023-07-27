@@ -17,6 +17,7 @@
     "radio",
     "button",
     "http",
+    "api",
     "control",
     "homekit",
     "switcheroo",
