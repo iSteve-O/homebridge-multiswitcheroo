@@ -1,0 +1,163 @@
+{
+	"pluginAlias": "MultiSwitcheroo",
+	"pluginType": "accessory",
+	"singular": true,
+	"schema": {
+		"type": "object",
+		"properties": {
+			"MultiSwitcheroo": {
+				"title": "Multi-Switch Devices",
+				"description": "Settings for MultiSwitcheroo Devices",
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+						"accessory": {
+							"title": "MultiSwitcheroo",
+							"type": "string",
+							"required": true,
+							"description": "The type of acccessory should be MultiSwitcheroo."
+						},
+						"name": {
+							"type": "string",
+							"title": "Main Switch Name",
+							"required": true,
+							"description": "The name of the main multi-switch device for HomeKit."
+						},
+						"manufacturer": {
+							"type": "string",
+							"title": "Manufacturer",
+							"required": false,
+							"description": "Name of the manufacturer in HomeKit."
+						},
+						"model": {
+							"type": "string",
+							"title": "Model",
+							"required": false,
+							"description": "Name of the model in HomeKit."
+						},
+						"serialNumber": {
+							"type": "string",
+							"title": "Serial Number",
+							"required": false,
+							"description": "Serial number displayed in HomeKit."
+						},
+						"statusUrl": {
+							"type": "string",
+							"title": "Status URL",
+							"required": true,
+							"description": "URL to call for status response using GET."
+						},
+						"pollingInterval": {
+							"type": "integer",
+							"title": "Polling Interval (Miliseconds)",
+							"description": "Polling interval for status URL.",
+							"required": true,
+							"placeholder": 3000,
+							"default": 3000
+						},
+						"switches": {
+							"type": "array",
+							"title": "Included Switches",
+							"description": "Array of switches to be exposed under one MultiSwitcheroo.",
+							"items": {
+								"type": "object",
+								"properties": {
+									"name": {
+										"type": "string",
+										"required": true,
+										"description": "Name of the switch."
+									},
+									"onUrl": {
+										"type": "string",
+										"required": true,
+										"description": "URL to call using GET request when turned On."
+									},
+									"offUrl": {
+										"type": "string",
+										"required": true,
+										"description": "URL to call using GET request when turned Off."
+									},
+									"statusPattern": {
+										"type": "string",
+										"required": true,
+										"description": "regexp string to parse from statusURL response to get status."
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"Switcheroo": {
+				"title": "Single-Switch Devices",
+				"description": "Settings for Switcheroo Devices",
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+						"accessory": {
+							"title": "Switcheroo",
+							"type": "string",
+							"required": true,
+							"description": "The type of acccessory should be MultiSwitcheroo."
+						},
+						"name": {
+							"type": "string",
+							"title": "Main Switch Name",
+							"required": true,
+							"description": "The name of the main multi-switch device for HomeKit."
+						},
+						"manufacturer": {
+							"type": "string",
+							"title": "Manufacturer",
+							"required": false,
+							"description": "Name of the manufacturer in HomeKit."
+						},
+						"model": {
+							"type": "string",
+							"title": "Model",
+							"required": false,
+							"description": "Name of the model in HomeKit."
+						},
+						"serialNumber": {
+							"type": "string",
+							"title": "Serial Number",
+							"required": false,
+							"description": "Serial number displayed in HomeKit."
+						},
+						"statusUrl": {
+							"type": "string",
+							"title": "Status URL",
+							"required": true,
+							"description": "URL to call for status response using GET."
+						},
+						"pollingInterval": {
+							"type": "integer",
+							"title": "Polling Interval (Miliseconds)",
+							"description": "Polling interval for status URL.",
+							"required": true,
+							"placeholder": 3000,
+							"default": 3000
+						},
+						"onUrl": {
+							"type": "string",
+							"required": true,
+							"description": "URL to call using GET request when turned On."
+						},
+						"offUrl": {
+							"type": "string",
+							"required": true,
+							"description": "URL to call using GET request when turned Off."
+						},
+						"statusPattern": {
+							"type": "string",
+							"required": true,
+							"description": "regexp string to parse from statusURL response to get status."
+						}
+					}
+				}
+			}
+		}
+	}
+}
