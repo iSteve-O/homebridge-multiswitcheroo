@@ -1,0 +1,124 @@
+{
+  "pluginAlias": "MultiSwitcheroo",
+  "pluginType": "accessory",
+  "singular": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "accessories": {
+        "title": "Accessories",
+        "description": "List of accessories",
+        "type": "array",
+        "items": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "accessory": {
+                  "type": "string",
+                  "enum": ["MultiSwitcheroo"]
+                },
+                "name": {
+                  "type": "string",
+                  "title": "Main Switch Name"
+                },
+                "manufacturer": {
+                  "type": "string",
+                  "title": "Manufacturer"
+                },
+                "model": {
+                  "type": "string",
+                  "title": "Model"
+                },
+                "serialNumber": {
+                  "type": "string",
+                  "title": "Serial Number"
+                },
+                "statusUrl": {
+                  "type": "string",
+                  "title": "Status URL"
+                },
+                "pollingInterval": {
+                  "type": "integer",
+                  "title": "Polling Interval (Miliseconds)"
+                },
+                "switches": {
+                  "type": "array",
+                  "title": "Included Switches",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "title": "Name"
+                      },
+                      "onUrl": {
+                        "type": "string",
+                        "title": "On URL"
+                      },
+                      "offUrl": {
+                        "type": "string",
+                        "title": "Off URL"
+                      },
+                      "statusPattern": {
+                        "type": "string",
+                        "title": "Status Pattern"
+                      }
+                    }
+                  }
+                }
+              },
+              "required": ["accessory", "name", "statusUrl", "pollingInterval", "switches"]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "accessory": {
+                  "type": "string",
+                  "enum": ["Switcheroo"]
+                },
+                "name": {
+                  "type": "string",
+                  "title": "Switch Name"
+                },
+                "manufacturer": {
+                  "type": "string",
+                  "title": "Manufacturer"
+                },
+                "model": {
+                  "type": "string",
+                  "title": "Model"
+                },
+                "serialNumber": {
+                  "type": "string",
+                  "title": "Serial Number"
+                },
+                "onUrl": {
+                  "type": "string",
+                  "title": "On URL"
+                },
+                "offUrl": {
+                  "type": "string",
+                  "title": "Off URL"
+                },
+                "statusUrl": {
+                  "type": "string",
+                  "title": "Status URL"
+                },
+                "statusPattern": {
+                  "type": "string",
+                  "title": "Status Pattern"
+                },
+                "pollingInterval": {
+                  "type": "integer",
+                  "title": "Polling Interval (Miliseconds)"
+                }
+              },
+              "required": ["accessory", "name", "onUrl", "offUrl", "statusUrl", "statusPattern", "pollingInterval"]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
