@@ -1,0 +1,174 @@
+{
+	"pluginAlias": "MultiSwitcheroo",
+	"pluginType": "accessory",
+	"singular": false,
+	"schema": {
+		"type": "array",
+		"items": {
+			"oneOf": [{
+				"MultiSwitcheroo": {
+					"title": "Multi-Switch Devices",
+					"description": "Settings for MultiSwitcheroo Devices",
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"accessory": {
+								"title": "MultiSwitcheroo",
+								"type": "string",
+								"required": true,
+								"placeholder": "MultiSwitcheroo",
+								"description": "The type of acccessory must be MultiSwitcheroo."
+							},
+							"name": {
+								"type": "string",
+								"title": "Main Switch Name",
+								"required": true,
+								"description": "The name of the main multi-switch device for HomeKit."
+							},
+							"manufacturer": {
+								"type": "string",
+								"title": "Manufacturer",
+								"required": false,
+								"description": "Name of the manufacturer in HomeKit."
+							},
+							"model": {
+								"type": "string",
+								"title": "Model",
+								"required": false,
+								"description": "Name of the model in HomeKit."
+							},
+							"serialNumber": {
+								"type": "string",
+								"title": "Serial Number",
+								"required": false,
+								"description": "Serial number displayed in HomeKit."
+							},
+							"statusUrl": {
+								"type": "string",
+								"title": "Status URL",
+								"required": true,
+								"description": "URL to call for status response using GET."
+							},
+							"pollingInterval": {
+								"type": "integer",
+								"title": "Polling Interval (Miliseconds)",
+								"description": "Polling interval for status URL.",
+								"required": true,
+								"placeholder": 3000
+							},
+							"switches": {
+								"type": "array",
+								"title": "Included Switches",
+								"description": "Array of switches to be exposed under one MultiSwitcheroo.",
+								"items": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"title": "Name",
+											"type": "string",
+											"required": true,
+											"description": "Name of the switch."
+										},
+										"onUrl": {
+											"title": "On URL",
+											"type": "string",
+											"required": true,
+											"description": "URL to call using GET request when turned On."
+										},
+										"offUrl": {
+											"title": "Off URL",
+											"type": "string",
+											"required": true,
+											"description": "URL to call using GET request when turned Off."
+										},
+										"statusPattern": {
+											"title": "Status Pattern",
+											"type": "string",
+											"format": "regex",
+											"required": true,
+											"description": "regexp string to parse from statusURL response to get status."
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"Switcheroo": {
+					"title": "Single-Switch Devices",
+					"description": "Settings for Switcheroo Devices",
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"accessory": {
+								"title": "Switcheroo",
+								"type": "string",
+								"required": true,
+								"placeholder": "Switcheroo",
+								"description": "The type of acccessory must be MultiSwitcheroo."
+							},
+							"name": {
+								"type": "string",
+								"title": "Switch Name",
+								"required": true,
+								"description": "The name of the main multi-switch device for HomeKit."
+							},
+							"manufacturer": {
+								"type": "string",
+								"title": "Manufacturer",
+								"required": false,
+								"description": "Name of the manufacturer in HomeKit."
+							},
+							"model": {
+								"type": "string",
+								"title": "Model",
+								"required": false,
+								"description": "Name of the model in HomeKit."
+							},
+							"serialNumber": {
+								"type": "string",
+								"title": "Serial Number",
+								"required": false,
+								"description": "Serial number displayed in HomeKit."
+							},
+							"onUrl": {
+								"title": "On URL",
+								"type": "string",
+								"required": true,
+								"description": "URL to call using GET request when turned On."
+							},
+							"offUrl": {
+								"title": "Off URL",
+								"type": "string",
+								"required": true,
+								"description": "URL to call using GET request when turned Off."
+							},
+							"statusUrl": {
+								"type": "string",
+								"title": "Status URL",
+								"required": true,
+								"description": "URL to call for status response using GET."
+							},
+							"statusPattern": {
+								"title": "Status Pattern",
+								"type": "string",
+								"format": "regex",
+								"required": true,
+								"description": "regexp string to parse from statusURL response to get status."
+							},
+							"pollingInterval": {
+								"type": "integer",
+								"title": "Polling Interval (Miliseconds)",
+								"description": "Polling interval for status URL.",
+								"required": true,
+								"placeholder": 3000
+							}
+						}
+					}
+				}
+			}]
+		}
+	}
+}
