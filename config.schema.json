@@ -85,7 +85,8 @@
 									},
 									"statusPattern": {
 										"title": "Status Pattern",
-										"type": "regex",
+										"type": "string",
+										"format": "regex",
 										"required": true,
 										"description": "regexp string to parse from statusURL response to get status."
 									}
@@ -154,7 +155,8 @@
 						},
 						"statusPattern": {
 							"title": "Status Pattern",
-							"type": "regex",
+							"type": "string",
+							"format": "regex",
 							"required": true,
 							"description": "regexp string to parse from statusURL response to get status."
 						},
