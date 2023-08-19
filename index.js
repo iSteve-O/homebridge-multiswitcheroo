@@ -12,6 +12,8 @@ module.exports = (homebridge) => {
 class MultiSwitcheroo {
   constructor(log, config) {
     this.log = log;
+    this.config = config;
+    console.log('Received config:', config);
     this.name = config.name;
     this.onUrl = config.onUrl;
     this.offUrl = config.offUrl;
