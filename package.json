@@ -5,10 +5,10 @@
   "author": "iSteve-O",
   "description": "User defined switches for http GET requests. Simple on/off or multiswitch on/off. Useful for lights, A/V systems, home automation, and includes live status polling!",
   "license": "MIT",
-  "homepage": "https://github.com/iSteve-O/homebridge-multiswitcheroo",
+  "homepage": "https://github.com/iSteve-O/homebridge-multiswitcheroo/blob/NewVersion/README.md",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iSteve-O/homebridge-multiswitcheroo.git"
+    "url": "git+https://github.com/iSteve-O/homebridge-multiswitcheroo/tree/NewVersion"
   },
   "keywords": [
     "homebridge-plugin",
