@@ -17,11 +17,12 @@ class MultiSwitcheroo {
     this.offUrl = config.offUrl;
     this.statusUrl = config.statusUrl;
     this.pollingInterval = config.pollingInterval || 3000;
-    this.statusPattern = config.statusPattern || '/1/';
+    this.statusPattern = config.statusPattern || "/1/";
     this.manufacturer = config.manufacturer || 'iSteve-O';
     this.model = config.model || 'MultiSwitcheroo';
     this.serialNumber = config.serialNumber || this.name;
     this.switches = [];
+
     for (const switchConfig of config.switches) {
       const switchName = switchConfig.name;
       const switchService = new Service.Switch(switchName, switchName);
@@ -29,6 +30,7 @@ class MultiSwitcheroo {
         .getCharacteristic(Characteristic.On)
         .on('set', (on, callback) => { this.setOn(on, callback, switchConfig); })
         .on('get', (callback) => { this.getOn(callback, switchConfig); });
+
       if (config.statusUrl && switchConfig.statusPattern) {
         const statusemitter = pollingtoevent((done) => {
           request.get({
@@ -39,23 +41,25 @@ class MultiSwitcheroo {
             done(null, body);
           });
         }, { longpolling: true, interval: config.pollingInterval });
+
         statusemitter.on('longpoll', (data) => {
           const isOn = !!data.match(switchConfig.statusPattern);
           switchService.getCharacteristic(Characteristic.On).updateValue(isOn);
         });
+
         statusemitter.on('error', (error) => {
           this.log(`Polling error: ${error}`);
         });
       }
+
+      this.switches.push(switchService);
+    }
+
     this.informationService = new Service.AccessoryInformation();
     this.informationService
       .setCharacteristic(Characteristic.Manufacturer, this.manufacturer)
       .setCharacteristic(Characteristic.Model, this.model)
       .setCharacteristic(Characteristic.SerialNumber, this.serialNumber);
-  }
-      }
-      this.switches.push(switchService);
-    }
   }
 
   setOn(on, callback, switchConfig) {
