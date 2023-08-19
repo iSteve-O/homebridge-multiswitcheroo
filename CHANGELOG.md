@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 # *If using `Switcheroo` type accessories, please see [README](https://github.com/iSteve-O/homebridge-multiswitcheroo/blob/NewVersion/README.md) note before updating to v2.0!!
 # *Version 2.0 contains breaking changes for `Switcheroo` type accessories.
 
-## [2.0] - 2023-08-19
+## [2.0.0] - 2023-08-19
 ### Changed
 - Optimized code to remove unnecessary `Switcheroo` accessory
     (Install homebridge-http-switch to replace functionality as stated in README).
