@@ -12,6 +12,7 @@ module.exports = (homebridge) => {
 class MultiSwitcheroo {
   constructor(log, config) {
     this.log = log;
+    this.config = config; // Store the config object
     this.name = config.name;
     this.onUrl = config.onUrl;
     this.offUrl = config.offUrl;
@@ -31,16 +32,16 @@ class MultiSwitcheroo {
         .on('set', (on, callback) => { this.setOn(on, callback, switchConfig); })
         .on('get', (callback) => { this.getOn(callback, switchConfig); });
 
-      if (config.statusUrl && switchConfig.statusPattern) {
+      if (this.config.statusUrl && switchConfig.statusPattern) { // Use this.config.statusUrl
         const statusemitter = pollingtoevent((done) => {
           request.get({
-            url: config.statusUrl,
+            url: this.config.statusUrl, // Use this.config.statusUrl
             rejectUnauthorized: false
           }, (err, response, body) => {
             if (err) return done(err, null);
             done(null, body);
           });
-        }, { longpolling: true, interval: config.pollingInterval });
+        }, { longpolling: true, interval: this.config.pollingInterval });
 
         statusemitter.on('longpoll', (data) => {
           const isOn = !!data.match(switchConfig.statusPattern);
@@ -76,9 +77,9 @@ class MultiSwitcheroo {
   }
 
   getOn(callback, switchConfig) {
-    if (!config.statusUrl || !switchConfig.statusPattern) return callback(null, false);
+    if (!this.config.statusUrl || !switchConfig.statusPattern) return callback(null, false);
     request.get({
-      url: config.statusUrl,
+      url: this.config.statusUrl, // Use this.config.statusUrl
       rejectUnauthorized: false
     }, (err, response, body) => {
       if (!err && response.statusCode === 200) {
