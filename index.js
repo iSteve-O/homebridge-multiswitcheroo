@@ -90,9 +90,3 @@ class MultiSwitcheroo {
     return [this.informationService, ...this.switches];
   }
 }
-
-module.exports = (homebridge) => {
-  Service = homebridge.hap.Service;
-  Characteristic = homebridge.hap.Characteristic;
-  homebridge.registerAccessory('homebridge-multiswitcheroo', 'MultiSwitcheroo', MultiSwitcheroo);
-};
