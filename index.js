@@ -92,7 +92,7 @@ class MultiSwitcheroo {
         if (response.status === 200) {
           const isOn = !!String(response.data).match(switchConfig.statusPattern);
           this.log.info(`Status Request: ${this.config.statusUrl}`);
-          this.log.info(`Status Request: ${switchConfig.statusPattern}');
+          this.log.info(`Status Request: ${this.config.statusPattern}');
           callback(null, isOn);
         } else {
           this.log.warn(`REQUEST ERROR: ${this.config.statusUrl}, CODE: ${response.status}`);
