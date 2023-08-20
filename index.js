@@ -88,21 +88,25 @@ class MultiSwitcheroo {
   getOn(callback, switchConfig) {
     if (!this.config.statusUrl || !switchConfig.statusPattern) return callback(null, false);
     this.log.warn(`statusPattern: ${switchConfig.statusPattern}`); // Log the status pattern
-    axios.get({
-      url: this.config.statusUrl, // Use this.config.statusUrl
-      rejectUnauthorized: false
-    }, (err, response, body) => {
-      if (!err && response.statusCode === 200) {
-        this.log.warn(`Response Data: ${JSON.stringify(response.data)}`);
-        const isOn = !!body.match(switchConfig.statusPattern);
-        this.log.info(`Status Req URL: ${this.config.statusUrl}`);
-        this.log.info(`Status Pattern: ${this.config.statusPattern}`);
-        callback(null, isOn);
-      } else {
-        this.log.warn(`REQUEST ERROR: ${this.config.statusUrl}, CODE: ${response.status}`);
-        callback(err || new Error(`Invalid response: ${response.statusCode}`));
-      }
-    });
+    axios.get(this.config.statusUrl, { rejectUnauthorized: false })
+      .then((response) => {
+        if (response.status === 200) {
+          this.log.warn(`Response Data: ${JSON.stringify(response.data)}`);
+          const pattern = new RegExp(switchConfig.statusPattern);
+          const isOn = pattern.test(response.data);
+          // const isOn = !!String(response.data).match(switchConfig.statusPattern); //remove the 2 lines above to reinstate
+          this.log.info(`Status Request: ${this.config.statusUrl}`);
+          this.log.info(`Status Request: ${this.config.statusPattern}`);
+          callback(null, isOn);
+        } else {
+          this.log.warn(`REQUEST ERROR: ${this.config.statusUrl}, CODE: ${response.status}`);
+          callback(new Error(`Invalid response: ${response.status}`));
+        }
+      })
+      .catch((error) => {
+        this.log.warn(`REQUEST ERROR: ${this.config.statusUrl}, CODE: ${error}`);
+        callback(error);
+      });
   }
 
   getServices() {
