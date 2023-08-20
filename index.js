@@ -91,7 +91,7 @@ class MultiSwitcheroo {
     axios.get(this.config.statusUrl, { rejectUnauthorized: false })
       .then((response) => {
         if (response.status === 200) {
-          this.log.debug(`Response Data: ${JSON.stringify(response.data)}`);
+          this.log.warn(`Response Data: ${JSON.stringify(response.data)}`);
           const isOn = !!String(response.data).match(switchConfig.statusPattern);
           this.log.info(`Status Request: ${this.config.statusUrl}`);
           this.log.info(`Status Request: ${this.config.statusPattern}`);
