@@ -42,7 +42,9 @@ class MultiSwitcheroo {
         }, { longpolling: true, interval: this.config.pollingInterval });
 
         statusemitter.on('longpoll', (data) => {
-          const isOn = !!String(data).match(switchConfig.statusPattern);
+          const responseData = data.toString(); // Convert response data to string
+          this.log.info(`Received status data: ${responseData}`);
+          const isOn = responseData.includes(switchConfig.statusPattern);
           switchService.getCharacteristic(Characteristic.On).updateValue(isOn);
           this.log.info(`Polling status for ${switchConfig.name}: ${isOn}`);
         });
