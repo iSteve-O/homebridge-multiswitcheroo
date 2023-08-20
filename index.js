@@ -13,8 +13,7 @@ module.exports = (homebridge) => {
 class MultiSwitcheroo {
   constructor(log, config) {
     this.log = log;
-    this.config = config;
-    this.log.info('MultiSwitcheroo plugin initialized');
+    this.config = config; // Store the config object
     this.name = config.name;
     this.onUrl = config.onUrl;
     this.offUrl = config.offUrl;
@@ -24,20 +23,18 @@ class MultiSwitcheroo {
     this.manufacturer = config.manufacturer || 'iSteve-O';
     this.model = config.model || 'MultiSwitcheroo';
     this.serialNumber = config.serialNumber || this.name;
-    this.firmwareRevision = config.firmwareRevision || pkgVersion;
+    this.firmwareRevision = config.firmwareRevision || pkgVersion; // Use pkgVersion from package.json
     this.switches = [];
 
     for (const switchConfig of config.switches) {
-      this.log.info(`Creating switch: ${switchConfig.name}`);
       const switchName = switchConfig.name;
       const switchService = new Service.Switch(switchName, switchName);
-
       switchService
         .getCharacteristic(Characteristic.On)
         .on('set', (on, callback) => { this.setOn(on, callback, switchConfig); })
         .on('get', (callback) => { this.getOn(callback, switchConfig); });
 
-      if (this.config.statusUrl && switchConfig.statusPattern) {
+      if (this.config.statusUrl && switchConfig.statusPattern) { // Use this.config.statusUrl
         const statusemitter = pollingtoevent((done) => {
           axios.get(this.config.statusUrl, { rejectUnauthorized: false })
             .then((response) => done(null, response.data))
@@ -45,19 +42,16 @@ class MultiSwitcheroo {
         }, { longpolling: true, interval: this.config.pollingInterval });
 
         statusemitter.on('longpoll', (data) => {
-          this.log.info(`Polling data received for ${switchConfig.name}:`, data);
-          const isOn = data.includes(switchConfig.statusPattern);
+          const isOn = !!data.match(switchConfig.statusPattern);
           switchService.getCharacteristic(Characteristic.On).updateValue(isOn);
-          this.log.info(`Polling status for ${switchConfig.name}: ${isOn}`);
         });
 
         statusemitter.on('error', (error) => {
-          this.log.warn(`Polling error: ${error}`);
+          this.log(`Polling error: ${error}`);
         });
       }
 
       this.switches.push(switchService);
-      this.log.info(`Switch created: ${switchConfig.name}`);
     }
 
     this.informationService = new Service.AccessoryInformation();
@@ -65,23 +59,19 @@ class MultiSwitcheroo {
       .setCharacteristic(Characteristic.Manufacturer, this.manufacturer)
       .setCharacteristic(Characteristic.Model, this.model)
       .setCharacteristic(Characteristic.SerialNumber, this.serialNumber)
-      .setCharacteristic(Characteristic.FirmwareRevision, this.firmwareRevision);
-    this.log.info(`${this.name} initialized...\nModel: ${this.model}\nManufacturer: ${this.manufacturer}\nSerial Number: ${this.serialNumber}\nFirmware Version: ${this.firmwareRevision}`);
+      .setCharacteristic(Characteristic.FirmwareRevision, this.firmwareRevision); // Set firmware revision
   }
 
   setOn(on, callback, switchConfig) {
     axios.get(on ? switchConfig.onUrl : switchConfig.offUrl, { rejectUnauthorized: false })
       .then((response) => {
         if (response.status === 200) {
-          this.log.info(`${switchConfig.name} toggled successfully`);
           callback(null);
         } else {
-          this.log.warn(`ERROR SETTING ${switchConfig.name}, CODE: ${response.status}`);
           callback(new Error(`Invalid response: ${response.status}`));
         }
       })
       .catch((error) => {
-        this.log.warn(`ERROR SETTING ${switchConfig.name}: ${error}`);
         callback(error);
       });
   }
@@ -91,16 +81,13 @@ class MultiSwitcheroo {
     axios.get(this.config.statusUrl, { rejectUnauthorized: false })
       .then((response) => {
         if (response.status === 200) {
-          const isOn = !!String(response.data).match(switchConfig.statusPattern);
-          this.log.info(`Status Request: ${this.config.statusUrl}`);
+          const isOn = !!response.data.match(switchConfig.statusPattern);
           callback(null, isOn);
         } else {
-          this.log.warn(`REQUEST ERROR: ${this.config.statusUrl}, CODE: ${response.status}`);
           callback(new Error(`Invalid response: ${response.status}`));
         }
       })
       .catch((error) => {
-        this.log.warn(`REQUEST ERROR: ${this.config.statusUrl}, CODE: ${error}`);
         callback(error);
       });
   }
