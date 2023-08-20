@@ -87,6 +87,7 @@ class MultiSwitcheroo {
 
   getOn(callback, switchConfig) {
     if (!this.config.statusUrl || !switchConfig.statusPattern) return callback(null, false);
+    this.log.warn(`statusPattern: ${switchConfig.statusPattern}`); // Log the status pattern
     axios.get(this.config.statusUrl, { rejectUnauthorized: false })
       .then((response) => {
         if (response.status === 200) {
