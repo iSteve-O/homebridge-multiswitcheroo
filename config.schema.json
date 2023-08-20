@@ -37,6 +37,12 @@
 				"required": false,
 				"description": "Serial number displayed in HomeKit."
 			},
+			"firmwareRevision": {
+				"type": "string",
+				"title": "Firmware Revision",
+				"required": false,
+				"description": "Firmware version displayed in HomeKit."
+			},
 			"statusUrl": {
 				"type": "string",
 				"title": "Status URL",
