@@ -44,6 +44,7 @@ class MultiSwitcheroo {
         statusemitter.on('longpoll', (data) => {
           this.log('Received status data:', data); // Log the received data
           const dataString = JSON.stringify(data); // Convert the JSON object to a string
+          this.log('String data:', dataString); // Log the converted data
           const isOn = !!dataString.match(switchConfig.statusPattern);
           switchService.getCharacteristic(Characteristic.On).updateValue(isOn);
         });
