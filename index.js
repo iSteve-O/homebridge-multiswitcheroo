@@ -42,7 +42,7 @@ class MultiSwitcheroo {
         }, { longpolling: true, interval: this.config.pollingInterval });
 
         statusemitter.on('longpoll', (data) => {
-          const isOn = !!data.match(switchConfig.statusPattern);
+          const isOn = !!String(data).match(switchConfig.statusPattern);
           switchService.getCharacteristic(Characteristic.On).updateValue(isOn);
         });
 
