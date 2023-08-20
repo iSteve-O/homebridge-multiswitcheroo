@@ -101,7 +101,8 @@ class MultiSwitcheroo {
       } else {
         this.log.warn(`REQUEST ERROR: ${this.config.statusUrl}, CODE: ${response.status}`);
         callback(err || new Error(`Invalid response: ${response.statusCode}`));
-      });
+      }
+    });
   }
 
   getServices() {
