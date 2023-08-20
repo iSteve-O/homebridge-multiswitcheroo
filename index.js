@@ -1,5 +1,6 @@
 const request = require('request');
 const pollingtoevent = require('polling-to-event');
+const pkgVersion = require('./package.json').version;
 
 let Service, Characteristic;
 
@@ -22,6 +23,7 @@ class MultiSwitcheroo {
     this.manufacturer = config.manufacturer || 'iSteve-O';
     this.model = config.model || 'MultiSwitcheroo';
     this.serialNumber = config.serialNumber || this.name;
+    this.firmwareRevision = config.firmwareRevision || pkgVersion;
     this.switches = [];
 
     for (const switchConfig of config.switches) {
@@ -60,7 +62,8 @@ class MultiSwitcheroo {
     this.informationService
       .setCharacteristic(Characteristic.Manufacturer, this.manufacturer)
       .setCharacteristic(Characteristic.Model, this.model)
-      .setCharacteristic(Characteristic.SerialNumber, this.serialNumber);
+      .setCharacteristic(Characteristic.SerialNumber, this.serialNumber)
+      .setCharacteristic(Characteristic.FirmwareRevision, this.firmwareRevision);
   }
 
   setOn(on, callback, switchConfig) {
