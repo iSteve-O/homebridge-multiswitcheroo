@@ -35,17 +35,20 @@ class MultiSwitcheroo {
         .on('get', (callback) => { this.getOn(callback, switchConfig); });
 
       if (this.config.statusUrl && switchConfig.statusPattern) {
-        this.log.debug(`Emitter pattern: ${switchConfig.statusPattern}`);
+        //this.log.debug(`Emitter pattern: ${switchConfig.statusPattern}`);
         const statusemitter = pollingtoevent((done) => {
           axios.get(this.config.statusUrl, { rejectUnauthorized: false })
             .then((response) => done(null, response.data))
-            .catch((error) => done(error, null));
-        }, { longpolling: true, interval: this.config.pollingInterval });
+            .catch((error) => {
+              this.log.warn(`Error fetching status data: ${error.message}`);
+              done(error, null);
+            });
+        },
+        { longpolling: true, interval: this.config.pollingInterval }
+      );
 
         statusemitter.on('longpoll', (data) => {
-          this.log.debug(`Received status data:`, data);  // remove the slashes & parenthesis & semi to see all data in logs -Log the received data
-          // const dataString = JSON.stringify(data); // Convert the JSON object to a string
-          // this.log('String data:'); //, dataString); <remove the slashes & parenthesis & semi to see all data in logs -Log the converted data
+          //this.log.debug(`Received status data:`, data);  // remove the slashes & parenthesis & semi to see all data in logs -Log the received data
           const isOn = !!JSON.stringify(data).match(switchConfig.statusPattern);
           switchService.getCharacteristic(Characteristic.On).updateValue(isOn);
         });
@@ -73,7 +76,7 @@ class MultiSwitcheroo {
     axios.get(on ? switchConfig.onUrl : switchConfig.offUrl, { rejectUnauthorized: false })
       .then((response) => {
         if (response.status === 200) {
-          this.log.debug(`${switchConfig.name} toggled successfully ${response.status}`);
+          //this.log.debug(`${switchConfig.name} toggled successfully ${response.status}`);
           callback(null);
         } else {
           this.log.warn(`ERROR SETTING ${switchConfig.name}, CODE: ${response.status}`);
@@ -87,17 +90,17 @@ class MultiSwitcheroo {
   }
 
   getOn(callback, switchConfig) {
-    this.log.debug(`getOn URL Rec'd: ${this.config.statusUrl}`);
-    this.log.debug(`getOn Pattern Rec'd: ${switchConfig.statusPattern}`);
+    //this.log.debug(`getOn URL Rec'd: ${this.config.statusUrl}`);
+    //this.log.debug(`getOn Pattern Rec'd: ${switchConfig.statusPattern}`);
     if (!this.config.statusUrl || !switchConfig.statusPattern) return callback(null, false);
-    this.log.debug(`getOn statusPattern: ${switchConfig.statusPattern}`); // Log the status pattern ${switchConfig.statusPattern}
+    //this.log.debug(`getOn statusPattern: ${switchConfig.statusPattern}`); // Log the status pattern ${switchConfig.statusPattern}
     axios.get(this.config.statusUrl, { rejectUnauthorized: false })
       .then((response) => {
         if (response.status === 200) {
-          this.log.debug(`getOn Response Data:`, (response.data)); //log the response
+          //this.log.debug(`getOn Response Data:`, (response.data)); //log the response
           const isOn = !!JSON.stringify(response.data).match(switchConfig.statusPattern); //remove the 2 lines above to reinstate
-          this.log.debug(`getOn Status URL: ${this.config.statusUrl}`);
-          this.log.debug(`getOn switchConfig Pattern: ${switchConfig.statusPattern}`);
+          //this.log.debug(`getOn Status URL: ${this.config.statusUrl}`);
+          //this.log.debug(`getOn switchConfig Pattern: ${switchConfig.statusPattern}`);
           callback(null, isOn);
         } else {
           this.log.warn(`getOn REQUEST ERROR: ${this.config.statusUrl}, CODE: ${response.status}`);
