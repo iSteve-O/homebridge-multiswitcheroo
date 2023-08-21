@@ -6,16 +6,24 @@ All notable changes to this project will be documented in this file.
 # *Version 2.0 contains breaking changes for `Switcheroo` type accessories.
 
 
-## [3.0.0] - 2023-08-20
+</br>
+</br>
+
+## *Version 3.0 is a total re-write for optimization*
+
+</br>
+
+# Changelog
+## [3.0.0] - 2023-08-21
 ### Added
 - ability to set `firmwareVersion` in the config.
-- Proper error, warning & debug logging
+- Proper error, warning & debug logging (almost).
 
 ### Changed
 - removed unnecessary & outdated `require` dependancy. Should clear some install warnings.
 - changed from using deprecated `request` to `axios` for http requests.
 - fixed status polling so each accessory's `statusUrl` is called only once to update all switch statuses, instead of calling once for each switch at the `pollingInterval`.
-- v3.0 uses about 75% less CPU & 15% less memory, on average (based on `top`)!
+- v3.0 uses about 75% less CPU & 15% less memory, on average, than even v2.0 (based on `top`)!
 
 
 ## [2.0.0] - 2023-08-19
