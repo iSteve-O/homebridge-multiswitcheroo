@@ -19,7 +19,7 @@ class MultiSwitcheroo {
     this.offUrl = config.offUrl;
     this.statusUrl = config.statusUrl;
     this.pollingInterval = config.pollingInterval || 3000;
-    this.statusPattern = config.statusPattern || "/1/";
+    this.statusPattern = config.statusPattern || '/1/';
     this.manufacturer = config.manufacturer || 'iSteve-O';
     this.model = config.model || 'MultiSwitcheroo';
     this.serialNumber = config.serialNumber || this.name;
