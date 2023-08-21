@@ -50,10 +50,10 @@ class MultiSwitcheroo {
         if (switchConfig.statusPattern) {
           const isOn = !!statusData.match(switchConfig.statusPattern);
           switchService.getCharacteristic(Characteristic.On).updateValue(isOn);
-          if (!isOn && switchService.getCharacteristic(Characteristic.On).value) {
-            this.log.warn(`$(switchConfig.name) is off in the Home app, but should be on bsed on server respone.`);
-            switchService.getCharacteristic(Characteristic.On).setValue(true);
-          }
+          //if (!isOn && switchService.getCharacteristic(Characteristic.On).value) {
+            //this.log.warn(`$(switchConfig.name) is off in the Home app, but should be on bsed on server respone.`);
+            //switchService.getCharacteristic(Characteristic.On).setValue(true);
+          //}
         }
       }
     });
