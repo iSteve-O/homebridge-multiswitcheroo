@@ -120,7 +120,7 @@ class MultiSwitcheroo {
 
           //this.log.debug(`getOn Status URL: ${this.config.statusUrl}`);
           //this.log.debug(`getOn switchConfig Pattern: ${switchConfig.statusPattern}`);
-          switchService.getCharacteristic(Characteristic.On).updateValue(isOn);
+
           callback(null, isOn);
           
         } else {
