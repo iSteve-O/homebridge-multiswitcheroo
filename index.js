@@ -122,7 +122,9 @@ class MultiSwitcheroo {
           //this.log.debug(`getOn switchConfig Pattern: ${switchConfig.statusPattern}`);
 
           callback(null, isOn);
-          switchService.getCharacteristic(Characteristic.On).updateValue(isOn, null, 'force');
+          this.switches
+            .find(service => service === switchService)
+            getCharacteristic(Characteristic.On).updateValue(isOn, null, 'force');
         } else {
           this.log.warn(`getOn REQUEST ERROR: ${this.config.statusUrl}, CODE: ${response.status}`);
           callback(new Error(`getOn Invalid response: ${response.status}`));
