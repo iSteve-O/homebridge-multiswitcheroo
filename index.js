@@ -46,7 +46,7 @@ class MultiSwitcheroo {
           this.log.info('Received status data:'); //, data); <remove the slashes & parenthesis & semi to see all data in logs // Log the received data
           // const dataString = JSON.stringify(data); // Convert the JSON object to a string
           // this.log('String data:'); //, dataString); <remove the slashes & parenthesis & semi to see all data in logs // Log the converted data
-          const isOn = !!data.match(switchConfig.statusPattern);
+          const isOn = !!response.data.match(switchConfig.statusPattern);
           switchService.getCharacteristic(Characteristic.On).updateValue(isOn);
         });
 
