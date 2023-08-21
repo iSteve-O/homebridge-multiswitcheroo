@@ -43,7 +43,7 @@ class MultiSwitcheroo {
         }, { longpolling: true, interval: this.config.pollingInterval });
 
         statusemitter.on('longpoll', (data) => {
-          this.log.info(`Received status data:` (data)); // remove the slashes & parenthesis & semi to see all data in logs -Log the received data
+          this.log.info(`Received status data:`, data);  // remove the slashes & parenthesis & semi to see all data in logs -Log the received data
           // const dataString = JSON.stringify(data); // Convert the JSON object to a string
           // this.log('String data:'); //, dataString); <remove the slashes & parenthesis & semi to see all data in logs -Log the converted data
           const isOn = !!response.data.match(switchConfig.statusPattern);
@@ -94,7 +94,7 @@ class MultiSwitcheroo {
     axios.get(this.config.statusUrl, { rejectUnauthorized: false })
       .then((response) => {
         if (response.status === 200) {
-          this.log.warn(`getOn Response Data: ${JSON.stringify(response.data)}`); //log the response
+          this.log.warn(`getOn Response Data:` (response.data)); //log the response
           const isOn = !!response.data.match(switchConfig.statusPattern); //remove the 2 lines above to reinstate
           this.log.info(`getOn Status URL: ${this.config.statusUrl}`);
           this.log.info(`getOn config Pattern: ${this.config.statusPattern}`);
