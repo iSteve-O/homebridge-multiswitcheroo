@@ -41,7 +41,8 @@
 				"type": "string",
 				"title": "Firmware Revision",
 				"required": false,
-				"description": "Firmware version displayed in HomeKit."
+				"description": "Firmware version displayed in HomeKit. HomeKit expects Semantic Versioning, ie. `1.0.0`",
+				"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?$"
 			},
 			"statusUrl": {
 				"type": "string",
