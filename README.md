@@ -2,7 +2,8 @@
   <a href="https://homebridge.io"><img src="https://raw.githubusercontent.com/homebridge/branding/master/logos/homebridge-color-round-stylized.png" height="140"></a>
 </p>
 
-[![NPM version](https://badge.fury.io/js/homebridge-multiswitcheroo.svg)](https://npmjs.org/package/homebridge-multiswitcheroo)
+[![npm version](https://badgen.net/npm/v/homebridge-multiswitcheroo)](https://www.npmjs.com/package/homebridge-multiswitcheroo)
+[![npm downloads](https://badgen.net/npm/dt/homebridge-multiswitcheroo)](https://www.npmjs.com/package/homebridge-multiswitcheroo)
 
 # **MultiSwitcheroo**
 
@@ -26,15 +27,16 @@ Ideally, you would use this to set a characteristic, like volume. For example, o
 
 </br>
 </br>
+
 Define your `MultiSwitcheroo` with whatever `name` you want to appear as the main switch title in the home app. This is what is visible if left displayed as a single tile (default). The `name` for each switch is what the individual switches should show. Sometimes these transfer to the home app, and sometimes not, so you may have to rename them all once in the home app, but only once. 
 
 Then, set the appropriate `statusUrl` to call for the status at the set `pollingInterval` (default `3000`).
 
-The `statusPattern` is a regular expression string (regexp) sought in the response from the server to get an accurate status for each switch (see the `Mute` switch in the `MultiSwitcheroo` config example below for a really good example of a complex pattern where an unknown number is present in the string).
+The `statusPattern` is a regular expression string (regex) sought in the response from the server to get an accurate status for each switch (see the `Mute` switch in the `MultiSwitcheroo` config example below for a really good example of a complex pattern where an unknown number is present in the string).
 
-Set the `onUrl` & `offUrl` as appropriate. Must be the full URL, including `http://` & port.
+Set the `onUrl` & `offUrl` as appropriate for each switch. Must be the full URL, including `http://` & port.
 
-The `manufacturer`, `model`, and `serialNumber` are all optional, but it is best to set them. Controller for HomeKit will throw errors about duplicate serial numbers if you have multiple devices using `DEFAULT-SERIAL`. Plus, it's fun to set these with your name!
+The `manufacturer`, `model`, `serialNumber`, & `firmwareRevision` are all optional, but it is best to set them. If you do not set them, they will all default to things that will not error in Controller for HomeKit because of duplicate serial numbers if you have multiple devices using the same one. Plus, it's fun to set these with your own stuff anyway, plus I made it super easy for you in the ConfigUI!
 
 Currently only built to support the `GET` http method. 
 
@@ -100,6 +102,7 @@ If you already had a `Switcheroo` accessory defined & wish to update, simply cha
 | `manufacturer`         | will show in Home app description of this Homekit accessory, ex. 'Yamaha'           |          |
 | `model`                | will show in Home app description of this Homekit accessory, ex. 'Default Model'    |          |
 | `serialNumber`         | will show in Home app description of this Homekit accessory, ex. 'SERIALNUMBER1'    |          |
+| `firmwareRevision`     | will show in Home app description of this Homekit accessory, ex. '1.0.0'            |          |
 
 
 ## Tips
@@ -119,4 +122,5 @@ If you already had a `Switcheroo` accessory defined & wish to update, simply cha
 4. Update your `config.json` file or add swithces using plugin settings in the Homebridge ConfigUI.
 
 
-### This plugin was generated with a lot of help from ChatGPT.
+### This plugin was originally generated with a lot of help from ChatGPT, but i have since re-written it.
+
