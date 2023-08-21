@@ -28,7 +28,7 @@ class MultiSwitcheroo {
 
     const statusemitter = pollingtoevent((done) => {
       if (this.config.statusUrl) {
-        this.log.info(`Emitter calling URL`);
+        //this.log.debug(`Emitter calling URL`);
         axios.get(this.config.statusUrl, { rejectUnauthorized: false })
           .then((response) => done(null, response.data))
           .catch((error) => {
@@ -42,7 +42,7 @@ class MultiSwitcheroo {
     }, { longpolling: true, interval: this.config.pollingInterval });
 
     statusemitter.on('longpoll', (data) => {
-      this.log.info(`Parsing URL data`);
+      //this.log.debug(`Parsing URL data`);
       //this.log.debug(`Received status data:`, data);
       const statusData = JSON.stringify(data);
       for (const switchService of this.switches) {
@@ -55,7 +55,7 @@ class MultiSwitcheroo {
     });
 
     statusemitter.on('error', (error) => {
-      this.log.warn(`Polling error: ${error}`);
+      this.log.error(`Polling error: ${error}`);
     });
 
     for (const switchConfig of config.switches) {
@@ -82,7 +82,7 @@ class MultiSwitcheroo {
   }
 
   setOn(on, callback, switchConfig) {
-    this.log.info(`setOn calling URL`);
+    //this.log.debug(`setOn calling URL`);
     axios.get(on ? switchConfig.onUrl : switchConfig.offUrl, { rejectUnauthorized: false })
       .then((response) => {
         if (response.status === 200) {
@@ -94,7 +94,7 @@ class MultiSwitcheroo {
         }
       })
       .catch((error) => {
-        this.log.warn(`setOn ERROR SETTING ${switchConfig.name}: ${error}`);
+        this.log.error(`setOn ERROR SETTING ${switchConfig.name}: ${error}`);
         callback(error);
       });
   }
@@ -105,11 +105,11 @@ class MultiSwitcheroo {
 
     if (!this.config.statusUrl || !switchConfig.statusPattern) {
       return callback(null, false);
-      this.log.warn(`Make sure statusUrl & statusPattern are defined in your config`);
+      this.log.warn(`Make sure statusUrl & statusPattern are defined properly in your config`);
     }
 
     //this.log.debug(`getOn statusPattern: ${switchConfig.statusPattern}`);
-    this.log.info(`getOn calling URL`);
+    //this.log.debug(`getOn calling URL`);
     axios.get(this.config.statusUrl, { rejectUnauthorized: false })
       .then((response) => {
         if (response.status === 200) {
@@ -128,7 +128,7 @@ class MultiSwitcheroo {
         }
       })
       .catch((error) => {
-        this.log.warn(`getOn REQUEST ERROR: ${this.config.statusUrl}, CODE: ${error}`);
+        this.log.error(`getOn REQUEST ERROR: ${this.config.statusUrl}, CODE: ${error}`);
         callback(error);
       });
   }
