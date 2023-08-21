@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 # *If using `Switcheroo` type accessories, please see [README](https://github.com/iSteve-O/homebridge-multiswitcheroo/blob/NewVersion/README.md) note before updating to v2.0!!
 # *Version 2.0 contains breaking changes for `Switcheroo` type accessories.
 
+
+## [3.0.0] - 2023-08-20
+### Added
+- ability to set `firmwareVersion` in the config.
+- Proper error, warning & debug logging
+
+### Changed
+- removed unnecessary & outdated `require` dependancy. Should clear some install warnings.
+- changed from using deprecated `request` to `axios` for http requests.
+- fixed status polling so each accessory's `statusUrl` is called only once to update all switch statuses, instead of calling once for each switch at the `pollingInterval`.
+- v3.0 uses about 75% less CPU & 15% less memory, on average (based on `top`)!
+
+
 ## [2.0.0] - 2023-08-19
 ### Changed
 - Optimized code to remove unnecessary `Switcheroo` accessory
