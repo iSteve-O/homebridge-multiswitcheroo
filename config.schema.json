@@ -41,7 +41,7 @@
 				"type": "string",
 				"title": "Firmware Revision",
 				"required": false,
-				"description": "Firmware version displayed in HomeKit. HomeKit expects Semantic Versioning, ie. `1.0.0` or `23.24.16-beta`",
+				"description": "Firmware version displayed in HomeKit. HomeKit expects Semantic Versioning, ie. `1.0.0` or `23.24.16-beta`, & does not display the pre-release or build metadata, ie. will show 23.24.16",
 				"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?$"
 			},
 			"statusUrl": {
