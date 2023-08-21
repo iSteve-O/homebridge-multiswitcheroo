@@ -49,7 +49,8 @@ class MultiSwitcheroo {
 
         statusemitter.on('longpoll', (data) => {
           //this.log.debug(`Received status data:`, data);  // remove the slashes & parenthesis & semi to see all data in logs -Log the received data
-          const isOn = !!JSON.stringify(data).match(switchConfig.statusPattern);
+          const statusData = data; //Store the received data for each switch so only 1 call is made to URL
+          const isOn = !!JSON.stringify(statusData).match(switchConfig.statusPattern);
           switchService.getCharacteristic(Characteristic.On).updateValue(isOn);
         });
 
@@ -98,9 +99,10 @@ class MultiSwitcheroo {
       .then((response) => {
         if (response.status === 200) {
           //this.log.debug(`getOn Response Data:`, (response.data)); //log the response
-          const isOn = !!JSON.stringify(response.data).match(switchConfig.statusPattern); //remove the 2 lines above to reinstate
-          //this.log.debug(`getOn Status URL: ${this.config.statusUrl}`);
-          //this.log.debug(`getOn switchConfig Pattern: ${switchConfig.statusPattern}`);
+          const statusData = response.data;  //Store the received data for each switch so only 1 call is made to URL
+          const isOn = !!JSON.stringify(statusData).match(switchConfig.statusPattern); // Parse the response data
+          this.log.debug(`getOn Status URL: ${this.config.statusUrl}`);
+          this.log.debug(`getOn switchConfig Pattern: ${switchConfig.statusPattern}`);
           callback(null, isOn);
         } else {
           this.log.warn(`getOn REQUEST ERROR: ${this.config.statusUrl}, CODE: ${response.status}`);
