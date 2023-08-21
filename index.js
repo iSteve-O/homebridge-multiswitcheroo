@@ -69,7 +69,7 @@ class MultiSwitcheroo {
       .setCharacteristic(Characteristic.SerialNumber, this.serialNumber)
       .setCharacteristic(Characteristic.FirmwareRevision, this.firmwareRevision);
 
-    this.log.info(`${this.name} initialized...\n\t|Model: ${this.model}\n\t|Manufacturer: ${this.manufacturer}\n\t|Serial Number: ${this.serialNumber}\n\t|Firmware Version: ${this.firmwareRevision}`);
+    this.log.info(`\n${this.name} initialized...\n\t|Model: ${this.model}\n\t|Manufacturer: ${this.manufacturer}\n\t|Serial Number: ${this.serialNumber}\n\t|Firmware Version: ${this.firmwareRevision}`);
   }
 
   setOn(on, callback, switchConfig) {
