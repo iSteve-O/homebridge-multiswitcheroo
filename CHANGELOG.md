@@ -1,13 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# &#x2757;**WARNING**&#x2757;
 # *If using `Switcheroo` type accessories, please see [README](https://github.com/iSteve-O/homebridge-multiswitcheroo/blob/NewVersion/README.md) note before updating to v2.0!!
 # *Version 2.0 contains breaking changes for `Switcheroo` type accessories.
 
 ## [2.0.0] - 2023-08-19
 ### Changed
 - Optimized code to remove unnecessary `Switcheroo` accessory
-    (Install homebridge-http-switch to replace functionality as stated in README).
+    (Install [`homebridge-http-switch`](https://github.com/Supereg/homebridge-http-switch/tree/master) to replace functionality as stated in [README](https://github.com/iSteve-O/homebridge-multiswitcheroo/blob/NewVersion/README.md)).
 - Added ability to create `MultiSwitcheroo` accessories in the ConfigUI.
 
 ### Fixed
