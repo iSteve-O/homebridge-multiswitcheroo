@@ -32,7 +32,6 @@
   "dependencies": {
     "polling-to-event": "^2.1.0",
     "axios": "^1.4.0",
-    "require": "^2.4.20"
   },
   "bugs": {
     "url": "https://github.com/iSteve-O/homebridge-multiswitcheroo/issues"
