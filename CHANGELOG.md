@@ -1,27 +1,32 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# &#x2757;**WARNING**&#x2757;
 # *If using `Switcheroo` type accessories, please see [README](https://github.com/iSteve-O/homebridge-multiswitcheroo/blob/NewVersion/README.md) note before updating to v2.0!!
 # *Version 2.0 contains breaking changes for `Switcheroo` type accessories.
+
 
 ## [3.0.0] - 2023-08-20
 ### Added
 - ability to set `firmwareVersion` in the config.
-- lots of debug logging
+- Proper error, warning & debug logging
 
 ### Changed
-- changed from `request` to `axios` for http requests.
-- 
+- removed unnecessary & outdated `require` dependancy. Should clear some install warnings.
+- changed from using deprecated `request` to `axios` for http requests.
+- fixed status polling so each accessory's `statusUrl` is called only once to update all switch statuses, instead of calling once for each switch at the `pollingInterval`.
+- v3.0 uses about 75% less CPU & 15% less memory, on average (based on `top`)!
+
+
 ## [2.0.0] - 2023-08-19
 ### Changed
 - Optimized code to remove unnecessary `Switcheroo` accessory
-    (Install homebridge-http-switch to replace functionality as stated in README).
-
-### Added
+    (Install [`homebridge-http-switch`](https://github.com/Supereg/homebridge-http-switch/tree/master) to replace functionality as stated in [README](https://github.com/iSteve-O/homebridge-multiswitcheroo/blob/NewVersion/README.md)).
 - Added ability to create `MultiSwitcheroo` accessories in the ConfigUI.
 
 ### Fixed
 - Error logging is better now
+
 
 ## [1.0.3] - 2023-07-29
 ### Changed
