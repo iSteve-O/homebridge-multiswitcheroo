@@ -102,9 +102,11 @@ class MultiSwitcheroo {
     axios.get(on ? switchConfig.onUrl : switchConfig.offUrl, { rejectUnauthorized: false })
       .then((response) => {
         if (response.status === 200) {
+          if (!on) {
           setTimeout(() => {
             this.updateSwitchStatus(switchConfig);
         }, 1000); // Adjust the delay as needed
+      }
           //this.log.debug(`${switchConfig.name} toggled successfully ${response.status}`);
           callback(null);
         } else {
