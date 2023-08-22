@@ -102,6 +102,9 @@ class MultiSwitcheroo {
     axios.get(on ? switchConfig.onUrl : switchConfig.offUrl, { rejectUnauthorized: false })
       .then((response) => {
         if (response.status === 200) {
+          setTimeout(() => {
+            this.updateSwitchStatus(switchConfig);
+        }, 1000); // Adjust the delay as needed
           //this.log.debug(`${switchConfig.name} toggled successfully ${response.status}`);
           callback(null);
         } else {
@@ -112,6 +115,26 @@ class MultiSwitcheroo {
       .catch((error) => {
         this.log.error(`setOn ERROR SETTING ${switchConfig.name}: ${error}`);
         callback(error);
+      });
+  }
+
+  updateSwitchStatus(switchConfig) { //class specifically constructed to try to update when off
+    // Send a GET request to the status URL to update the switch status
+    axios.get(switchConfig.statusUrl, { rejectUnauthorized: false })
+      .then((response) => {
+        if (response.status === 200) {
+          const statusData = JSON.stringify(response.data);
+          const isOn = !!statusData.match(switchConfig.statusPattern);
+  
+          // Find the switch service based on switchConfig and update the characteristic
+          const switchService = this.switches.find(service => service.switchConfig === switchConfig);
+          if (switchService) {
+            switchService.getCharacteristic(Characteristic.On).updateValue(isOn);
+          }
+        }
+      })
+      .catch((error) => {
+        this.log.error(`Error updating switch status: ${error}`);
       });
   }
 
