@@ -1,13 +1,13 @@
 const axios = require('axios');
 const pollingtoevent = require('polling-to-event');
 const pkgVersion = require('./package.json').version;
-const axiosInstance = axios.create();
+//const axiosInstance = axios.create();
 
-axiosInstance.defaults.headers = {
-  'Cache-Control': 'no-cache',
-  'Pragma': 'no-cache',
-  'Expires': '0',
-};
+//axiosInstance.defaults.headers = { //attempt to construct axsio instance with cache-stripping headers.
+//  'Cache-Control': 'no-cache', //it didn't work
+//  'Pragma': 'no-cache',
+//  'Expires': '0',
+//};
 
 let Service, Characteristic;
 
@@ -36,8 +36,8 @@ class MultiSwitcheroo {
     const statusemitter = pollingtoevent((done) => {
       if (this.config.statusUrl) {
         //this.log.debug(`Emitter calling URL`);
-        const fakeResponse = '{"dummy": true}';
-        const dummyResponse = JSON.parse(fakeResponse);
+        //const fakeResponse = '{"dummy": true}'; //tried to make a dummy response to get new data
+        //const dummyResponse = JSON.parse(fakeResponse); //it did not work lol
         axiosInstance.get(this.config.statusUrl, { rejectUnauthorized: false })
           .then((response) => done(null, response.data))
           .catch((error) => {
@@ -54,10 +54,13 @@ class MultiSwitcheroo {
       //this.log.debug(`Parsing URL data`);
       //this.log.debug(`Received status data:`, data);
       const statusData = JSON.stringify(data);
+      this.counter = (this.counter || 0) % 10; // Ensure counter is within 0-9 range
+      const modifiedStatusData = statusData + this.counter; // Add unique character to data from counter
+      this.counter = (this.counter + 1) % 10; // Increment the counter for the next iteration
       for (const switchService of this.switches) {
         const switchConfig = switchService.switchConfig;
         if (switchConfig.statusPattern) {
-          const isOn = !!statusData.match(switchConfig.statusPattern);
+          const isOn = !!modifiedStatusData.match(switchConfig.statusPattern);
           switchService.getCharacteristic(Characteristic.On).updateValue(isOn);
           //if (!isOn && switchService.getCharacteristic(Characteristic.On).value) {
             //this.log.warn(`$(switchConfig.name) is off in the Home app, but should be on bsed on server respone.`);
@@ -123,8 +126,8 @@ class MultiSwitcheroo {
 
     //this.log.debug(`getOn statusPattern: ${switchConfig.statusPattern}`);
     //this.log.debug(`getOn calling URL`);
-    const fakeResponse = '{"dummy": true}';
-    const dummyResponse = JSON.parse(fakeResponse);
+    //const fakeResponse = '{"dummy": true}'; //tried to make a dummy response to get new data
+    //const dummyResponse = JSON.parse(fakeResponse); //it did not work lol
     axiosInstance.get(this.config.statusUrl, { rejectUnauthorized: false })
       .then((response) => {
         if (response.status === 200) {
