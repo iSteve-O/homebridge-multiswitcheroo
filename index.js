@@ -38,7 +38,7 @@ class MultiSwitcheroo {
         //this.log.debug(`Emitter calling URL`);
         //const fakeResponse = '{"dummy": true}'; //tried to make a dummy response to get new data
         //const dummyResponse = JSON.parse(fakeResponse); //it did not work lol
-        axiosInstance.get(this.config.statusUrl, { rejectUnauthorized: false })
+        axios.get(this.config.statusUrl, { rejectUnauthorized: false })
           .then((response) => done(null, response.data))
           .catch((error) => {
             this.log.error(`Error fetching status data: ${error.message}`);
@@ -99,7 +99,7 @@ class MultiSwitcheroo {
 
   setOn(on, callback, switchConfig) {
     //this.log.debug(`setOn calling URL`);
-    axiosInstance.get(on ? switchConfig.onUrl : switchConfig.offUrl, { rejectUnauthorized: false })
+    axios.get(on ? switchConfig.onUrl : switchConfig.offUrl, { rejectUnauthorized: false })
       .then((response) => {
         if (response.status === 200) {
           //this.log.debug(`${switchConfig.name} toggled successfully ${response.status}`);
@@ -128,7 +128,7 @@ class MultiSwitcheroo {
     //this.log.debug(`getOn calling URL`);
     //const fakeResponse = '{"dummy": true}'; //tried to make a dummy response to get new data
     //const dummyResponse = JSON.parse(fakeResponse); //it did not work lol
-    axiosInstance.get(this.config.statusUrl, { rejectUnauthorized: false })
+    axios.get(this.config.statusUrl, { rejectUnauthorized: false })
       .then((response) => {
         if (response.status === 200) {
           //this.log.debug(`getOn Response Data:`, response.data);
