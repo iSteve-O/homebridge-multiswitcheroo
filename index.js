@@ -86,12 +86,21 @@ class MultiSwitcheroo {
   }
 
   setOn(on, callback, switchConfig) {
-    //this.log.debug(`setOn calling URL`);
-    axios.get(on ? switchConfig.onUrl : switchConfig.offUrl, { rejectUnauthorized: false })
+   //this.log.debug(`setOn calling URL`);
+   axios.get(on ? switchConfig.onUrl : switchConfig.offUrl, { rejectUnauthorized: false })
       .then((response) => {
         if (response.status === 200) {
           //this.log.debug(`${switchConfig.name} toggled successfully ${response.status}`);
-          callback(null);
+          setTimeout(() => {
+            this.getOn((error, isOn) => {
+              if (!error) {
+                this.log.info(`${switchConfig.name} refreshed status: ${isOn}`);
+              } else {
+                this.log.error(`Error refreshing status after setOn: ${error}`);
+              }
+              callback(null);
+            }, switchConfig);
+          }, 500); // Adjust getOn delay after setOn
         } else {
           this.log.warn(`ERROR SETTING ${switchConfig.name}, CODE: ${response.status}`);
           callback(new Error(`setOn Invalid response: ${response.status}`));
