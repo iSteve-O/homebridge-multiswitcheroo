@@ -36,6 +36,8 @@ class MultiSwitcheroo {
     const statusemitter = pollingtoevent((done) => {
       if (this.config.statusUrl) {
         //this.log.debug(`Emitter calling URL`);
+        const fakeResponse = '{"dummy": true}';
+        const dummyResponse = JSON.parse(fakeResponse);
         axiosInstance.get(this.config.statusUrl, { rejectUnauthorized: false })
           .then((response) => done(null, response.data))
           .catch((error) => {
