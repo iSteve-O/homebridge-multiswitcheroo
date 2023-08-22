@@ -121,6 +121,8 @@ class MultiSwitcheroo {
 
     //this.log.debug(`getOn statusPattern: ${switchConfig.statusPattern}`);
     //this.log.debug(`getOn calling URL`);
+    const fakeResponse = '{"dummy": true}';
+    const dummyResponse = JSON.parse(fakeResponse);
     axiosInstance.get(this.config.statusUrl, { rejectUnauthorized: false })
       .then((response) => {
         if (response.status === 200) {
