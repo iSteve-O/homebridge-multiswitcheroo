@@ -39,9 +39,9 @@ class MultiSwitcheroo {
         this.log.warn(`Error: No statusURL defined in config.json`);
         done(null, null); // No status URL defined
       }
-    }, { longpolling: true, interval: this.config.pollingInterval });
+    }, { longpolling: false, interval: this.config.pollingInterval });
 
-    statusemitter.on('longpoll', (data) => {
+    statusemitter.on('poll', (data) => {
       //this.log.debug(`Parsing URL data`);
       //this.log.debug(`Received status data:`, data);
       const statusData = JSON.stringify(data);
