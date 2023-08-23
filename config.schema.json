@@ -41,26 +41,40 @@
 				"type": "string",
 				"title": "Firmware Revision",
 				"required": false,
-				"description": "Firmware version displayed in HomeKit. HomeKit expects Semantic Versioning, ie. `1.0.0` or `23.24.16-beta`, & does not display the pre-release or build metadata, ie. will show 23.24.16",
+				"description": "Firmware version displayed in HomeKit. HomeKit expects Simantic Versioning, ie. `1.0.0` or `23.24.16-beta`, & does not display the pre-release or build metadata, ie. will show 23.24.16",
 				"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?$"
 			},
 			"statusUrl": {
 				"type": "string",
 				"title": "Status URL",
 				"required": true,
-				"description": "URL to call for status response using GET."
+				"description": "URL to call for status response."
 			},
 			"statusRequestType": {
 				"type": "string",
 				"title": "Status URL",
 				"required": false,
-				"description": "Must be either GET, PUT, POST or DELETE."
+				"description": "Must be either GET, PUT, POST or DELETE (default GET if not specified)."
 			},
 			"statusRequestHeaders": {
 				"type": "object",
 				"title": "Status URL",
 				"required": false,
-				"description": "Headers go here."
+				"description": "Status request headers go here.",
+				"properties": {
+					"Authorization": {
+						"title": "Authorization Header",
+						"type": "string",
+						"required": false,
+						"description": "Bearer token or other authorization header."
+					},
+					"Content-Type": {
+						"title": "Content-Type Header",
+			            "type": "string",
+			            "required": false,
+			            "description": "Content type of the request."
+					}
+				}
 			},
 			"pollingInterval": {
 				"type": "integer",
@@ -99,7 +113,21 @@
 							"title": "On request headers",
 							"type": "object",
 							"required": false,
-							"description": "Headers to use when turned On."
+							"description": "Headers to use when turned On.",
+							"properties": {
+								"Authorization": {
+									"title": "Authorization Header",
+									"type": "string",
+									"required": false,
+									"description": "Bearer token or other authorization header."
+								},
+								"Content-Type": {
+									"title": "Content-Type Header",
+									"type": "string",
+									"required": false,
+									"description": "Content type of the request."
+								}
+							}
 						},
 						"offUrl": {
 							"title": "Off URL",
@@ -108,16 +136,30 @@
 							"description": "URL to call using GET request when turned Off."
 						},
 						"offRequestType": {
-							"title": "On request type",
+							"title": "Off request type",
 							"type": "string",
 							"required": false,
 							"description": "Must be either GET, PUT, POST or DELETE."
 						},
 						"offRequestHeaders": {
-							"title": "On request headers",
+							"title": "Off request headers",
 							"type": "object",
 							"required": false,
-							"description": "Headers to use when turned On."
+							"description": "Headers to use when turned On.",
+							"properties": {
+								"Authorization": {
+									"title": "Authorization Header",
+									"type": "string",
+									"required": false,
+									"description": "Bearer token or other authorization header."
+								},
+								"Content-Type": {
+									"title": "Content-Type Header",
+									"type": "string",
+									"required": false,
+									"description": "Content type of the request."
+								}
+							}
 						},
 						"statusPattern": {
 							"title": "Status Pattern",
