@@ -52,13 +52,14 @@
 			},
 			"statusRequestType": {
 				"type": "string",
-				"title": "Status URL",
+				"title": "Status Request Type",
+				"enum": ["GET", "PUT", "POST", "DELETE"],
 				"required": false,
-				"description": "Must be either GET, PUT, POST or DELETE (default GET if not specified)."
+				"description": "Must be either GET, PUT, POST or DELETE (default is GET if unspecified)."
 			},
 			"statusRequestHeaders": {
 				"type": "object",
-				"title": "Status URL",
+				"title": "Status Request Headers",
 				"required": false,
 				"description": "Status request headers go here.",
 				"properties": {
@@ -72,7 +73,7 @@
 						"title": "Content-Type Header",
 			            "type": "string",
 			            "required": false,
-			            "description": "Content type of the request."
+			            "description": "Content type header of the request."
 					}
 				}
 			},
@@ -101,13 +102,14 @@
 							"title": "On URL",
 							"type": "string",
 							"required": true,
-							"description": "URL to call using GET request when turned On."
+							"description": "URL to call using when turned On."
 						},
 						"onRequestType": {
 							"title": "On request type",
 							"type": "string",
+							"enum": ["GET", "PUT", "POST", "DELETE"],
 							"required": false,
-							"description": "Must be either GET, PUT, POST or DELETE."
+							"description": "Must be either GET, PUT, POST or DELETE (default is GET if unspecified)."
 						},
 						"onRequestHeaders": {
 							"title": "On request headers",
@@ -138,8 +140,9 @@
 						"offRequestType": {
 							"title": "Off request type",
 							"type": "string",
+							"enum": ["GET", "PUT", "POST", "DELETE"],
 							"required": false,
-							"description": "Must be either GET, PUT, POST or DELETE."
+							"description": "Must be either GET, PUT, POST or DELETE (default is GET if unspecified)."
 						},
 						"offRequestHeaders": {
 							"title": "Off request headers",
@@ -166,7 +169,7 @@
 							"type": "string",
 							"format": "regex",
 							"required": true,
-							"description": "regexp string to parse from statusURL response to get status."
+							"description": "regex string to parse from statusURL response to get status."
 						}
 					}
 				}
