@@ -83,7 +83,7 @@ Currently only built to support the `GET` http method.
 ### Standard Switch (`Switcheroo`)
 This switch version had to be removed from the plugin to fix the code. If you need a single switch install `homebridge-http-switch` or revert to version 1.0.3 of `homebridge-multiswitcheroo` and it will continue  to work.
 
-If you already had a `Switcheroo` accessory defined & wish to update, simply change the `accessory` type from `Switcheroo` to `HTTP-SWITCH` then install the `homebridge-http-switch` plugin and reboot. The switch should continue to work (scenes & automations may need to be rebuilt but I am unsure. Sorry about this.
+If you already had a `Switcheroo` accessory defined & wish to update, simply change the `accessory` type from `Switcheroo` to `HTTP-SWITCH` & change the `pollingInterval` config entry to `pullInterval`, then install the `homebridge-http-switch` plugin and reboot. The switch will continue to work just as before (scenes & automations will need to be rebuilt; sorry about this).
 
 
 
@@ -117,7 +117,7 @@ If you already had a `Switcheroo` accessory defined & wish to update, simply cha
 ## Installation
 
 1. Install homebridge using: `npm install -g homebridge`
-2. Install homebridge-http using: `npm install -g homebridge-multiswitcheroo`
+2. Install homebridge-multiswitcheroo using: `npm install -g homebridge-multiswitcheroo`
     *  if in `hb-shell` environment use: `hb-service add homebridge-multiswitcheroo`
 4. Update your `config.json` file or add swithces using plugin settings in the Homebridge ConfigUI.
 
