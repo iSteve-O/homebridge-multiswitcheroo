@@ -50,6 +50,18 @@
 				"required": true,
 				"description": "URL to call for status response using GET."
 			},
+			"statusRequestType": {
+				"type": "string",
+				"title": "Status URL",
+				"required": false,
+				"description": "Must be either GET, PUT, POST or DELETE."
+			},
+			"statusRequestHeaders": {
+				"type": "object",
+				"title": "Status URL",
+				"required": false,
+				"description": "Headers go here."
+			},
 			"pollingInterval": {
 				"type": "integer",
 				"title": "Polling Interval (Miliseconds)",
@@ -77,11 +89,35 @@
 							"required": true,
 							"description": "URL to call using GET request when turned On."
 						},
+						"onRequestType": {
+							"title": "On request type",
+							"type": "string",
+							"required": false,
+							"description": "Must be either GET, PUT, POST or DELETE."
+						},
+						"onRequestHeaders": {
+							"title": "On request headers",
+							"type": "object",
+							"required": false,
+							"description": "Headers to use when turned On."
+						},
 						"offUrl": {
 							"title": "Off URL",
 							"type": "string",
 							"required": true,
 							"description": "URL to call using GET request when turned Off."
+						},
+						"offRequestType": {
+							"title": "On request type",
+							"type": "string",
+							"required": false,
+							"description": "Must be either GET, PUT, POST or DELETE."
+						},
+						"offRequestHeaders": {
+							"title": "On request headers",
+							"type": "object",
+							"required": false,
+							"description": "Headers to use when turned On."
 						},
 						"statusPattern": {
 							"title": "Status Pattern",
