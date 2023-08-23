@@ -28,8 +28,11 @@ class MultiSwitcheroo {
     this.onRequestType = config.onRequestType || `GET`;
     this.offRequestType = config.offRequestType || `GET`;
     this.onRequestHeaders = config.onRequestHeaders || {};
+    this.onRequestBody = config.onRequestBody || {};
     this.offRequestHeaders = config.offRequestHeaders || {};
+    this.offRequestBody = config.offRequestBody || {};
     this.statusRequestHeaders = config.statusRequestHeaders || {};
+    this.statusRequestBody = config.statusRequestBody || {};
     this.switches = [];
 
     const statusemitter = pollingtoevent((done) => {
@@ -46,6 +49,9 @@ class MultiSwitcheroo {
               requestConfig.headers = this.config.requestHeaders;
             }
           }
+          if (requestType === 'POST' || requestType === 'PUT') {
+            requestConfig.data = this.config.statusRequestBody;
+        }
       
           axios(requestConfig)
             .then((response) => done(null, response.data))
@@ -113,6 +119,11 @@ class MultiSwitcheroo {
       }
     }
 
+    const requestBodyKey = on ? (switchConfig.onRequestBody) : (switchConfig.offRequestBody);
+    if (requestType === 'POST' || requestType === 'PUT') {
+      requestConfig.data = switchConfig[requestBodyKey];
+  }
+
     axios(requestConfig)
       .then((response) => {
         if (response.status === 200) {
@@ -146,6 +157,10 @@ class MultiSwitcheroo {
           requestConfig.headers = this.config.statusRequestHeaders;
         }
       }
+
+      if (requestType === 'POST' || requestType === 'PUT') {
+        requestConfig.data = this.config.statusRequestBody;
+    }
   
     axios(requestConfig)
       .then((response) => {

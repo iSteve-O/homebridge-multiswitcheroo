@@ -61,7 +61,7 @@
 				"type": "object",
 				"title": "Status Request Headers",
 				"required": false,
-				"description": "Status request headers go here.",
+				"description": "Headers go be used for status requests.",
 				"properties": {
 					"Authorization": {
 						"title": "Authorization Header",
@@ -76,6 +76,12 @@
 			            "description": "Content type header of the request."
 					}
 				}
+			},
+			"statusRequestBody": {
+				"title": "Body of status request when using PUT or POST",
+				"type": "string",
+				"required": false,
+				"description": "Body to be sent in PUT & POST status requests (ensure proper formatting)."
 			},
 			"pollingInterval": {
 				"type": "integer",
@@ -131,6 +137,12 @@
 								}
 							}
 						},
+						"onRequestBody": {
+							"title": "Body of On request when using PUT or POST.",
+							"type": "string",
+							"required": false,
+							"description": "Body to be sent in PUT & POST On requests (ensure proper formatting)."
+						},
 						"offUrl": {
 							"title": "Off URL",
 							"type": "string",
@@ -148,7 +160,7 @@
 							"title": "Off request headers",
 							"type": "object",
 							"required": false,
-							"description": "Headers to use when turned On.",
+							"description": "Headers to use when turned Off.",
 							"properties": {
 								"Authorization": {
 									"title": "Authorization Header",
@@ -163,6 +175,12 @@
 									"description": "Content type of the request."
 								}
 							}
+						},
+						"offRequestBody": {
+							"title": "Body of Off request when using PUT or POST",
+							"type": "string",
+							"required": false,
+							"description": "Body to be sent in PUT & POST Off requests (ensure proper formatting)."
 						},
 						"statusPattern": {
 							"title": "Status Pattern",
