@@ -36,7 +36,8 @@ class MultiSwitcheroo {
     this.disabled = config.disabled || false;
     this.switches = [];
 
-    const statusemitter = pollingtoevent((done) => {
+    if (!this.disabled) {
+      const statusemitter = pollingtoevent((done) => {
         if (this.config.statusUrl) {
           const requestType = this.config.statusRequestType || 'GET';
           const requestConfig = {
@@ -46,8 +47,8 @@ class MultiSwitcheroo {
           };
       
           if (requestType === 'POST' || requestType === 'PUT' || requestType === 'DELETE' || requestType === 'GET') {
-            if (this.config.requestHeaders) {
-              requestConfig.headers = this.config.requestHeaders;
+            if (this.config.statusRequestHeaders) {
+              requestConfig.headers = this.config.statusRequestHeaders;
             }
           }
           if (requestType === 'POST' || requestType === 'PUT') {
@@ -81,6 +82,11 @@ class MultiSwitcheroo {
     statusemitter.on('error', (error) => {
       this.log.error(`Polling error: ${error}`);
     });
+
+    this,statusemitter = statusemitter;
+  }else {
+    this.log.info(`${this.name} is disabled`);
+  }
 
     for (const switchConfig of config.switches) {
       const switchName = switchConfig.name;
