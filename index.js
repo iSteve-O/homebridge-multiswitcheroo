@@ -83,7 +83,7 @@ class MultiSwitcheroo {
       this.log.error(`Polling error: ${error}`);
     });
 
-    this,statusemitter = statusemitter;
+    this.statusemitter = statusemitter;
   }else {
     this.log.info(`${this.name} is disabled`);
   }
