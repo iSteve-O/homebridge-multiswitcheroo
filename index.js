@@ -33,6 +33,7 @@ class MultiSwitcheroo {
     this.offRequestBody = config.offRequestBody || {};
     this.statusRequestHeaders = config.statusRequestHeaders || {};
     this.statusRequestBody = config.statusRequestBody || {};
+    this.disabled = config.disabled || false;
     this.switches = [];
 
     const statusemitter = pollingtoevent((done) => {
@@ -181,6 +182,9 @@ class MultiSwitcheroo {
   
 
   getServices() {
+    if (this.disabled) {
+      return [];
+    }
     return [this.informationService, ...this.switches];
   }
 }
