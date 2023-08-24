@@ -183,6 +183,7 @@ class MultiSwitcheroo {
 
   getServices() {
     if (this.disabled) {
+      this.log.info(`${this.config.name} is disabled`);
       return [];
     }
     return [this.informationService, ...this.switches];
