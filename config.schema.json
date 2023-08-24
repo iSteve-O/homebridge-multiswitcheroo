@@ -18,7 +18,13 @@
 				"title": "Main Switch Name",
 				"required": true,
 				"description": "The name of the main multi-switch device for HomeKit."
-			},
+			}
+			"disabled": {
+        			"type": "boolean",
+        			"title": "Disable Accessory?",
+        			"description": "Set to true to disable this accessory.",
+        			"default": false
+      			},
 			"manufacturer": {
 				"type": "string",
 				"title": "Manufacturer",
