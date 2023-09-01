@@ -19,12 +19,6 @@
 				"required": true,
 				"description": "The name of the main multi-switch device for HomeKit."
 			},
-			"disabled": {
-        			"type": "boolean",
-        			"title": "Disabled?",
-        			"description": "Set to disable this MultiSwitcheroo accessory.",
-        			"default": false
-      			},
 			"manufacturer": {
 				"type": "string",
 				"title": "Manufacturer",
