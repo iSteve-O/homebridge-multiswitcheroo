@@ -1,14 +1,14 @@
 {
   "name": "homebridge-multiswitcheroo",
   "displayName": "MultiSwitcheroo",
-  "version": "3.0.3-beta.1",
+  "version": "3.0.2",
   "author": "iSteve-O",
   "description": "User defined switches for http GET requests. Simple on/off or multiswitch on/off. Useful for lights, A/V systems, home automation, and includes live status polling!",
   "license": "MIT",
-  "homepage": "https://github.com/iSteve-O/homebridge-multiswitcheroo/tree/OffFixVeriFixes",
+  "homepage": "https://github.com/iSteve-O/homebridge-multiswitcheroo/tree/OffFix",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iSteve-O/homebridge-multiswitcheroo/tree/OffFixVeriFixes"
+    "url": "git+https://github.com/iSteve-O/homebridge-multiswitcheroo/tree/OffFix"
   },
   "keywords": [
     "homebridge-plugin",
