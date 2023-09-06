@@ -14,6 +14,11 @@ All notable changes to this project will be documented in this file.
 </br>
 
 # Changelog
+## [3.0.2] - 2023-09-06
+### Fixed
+- Added check for valid config before creating switches.
+
+
 ## [3.0.1] - 2023-08-23
 ### Fixed
 - Changed how status polling works to update switch status even when server status has not changed.
