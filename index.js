@@ -62,17 +62,21 @@ class MultiSwitcheroo {
       this.log.error(`Polling error: ${error}`);
     });
 
-    for (const switchConfig of config.switches) {
-      const switchName = switchConfig.name;
-      const switchService = new Service.Switch(switchName, switchName);
-      switchService.switchConfig = switchConfig; // Attach switchConfig to the service
-      switchService
-        .getCharacteristic(Characteristic.On)
-        .on('set', (on, callback) => { this.setOn(on, callback, switchConfig); })
-        .on('get', (callback) => { this.getOn(callback, switchConfig); });
+    if (!Array.isArray(config.switches)) {
+      this.log.error('MultiSwitcheroo switches is not a properly defined array. Please define switches in the config & restart or disable the plugin.');
+    } else {
+      for (const switchConfig of config.switches) {
+        const switchName = switchConfig.name;
+        const switchService = new Service.Switch(switchName, switchName);
+        switchService.switchConfig = switchConfig; // Attach switchConfig to the service
+        switchService
+          .getCharacteristic(Characteristic.On)
+          .on('set', (on, callback) => { this.setOn(on, callback, switchConfig); })
+          .on('get', (callback) => { this.getOn(callback, switchConfig); });
 
-      this.switches.push(switchService);
-      this.log.info(`Switch created: ${switchConfig.name}`);
+        this.switches.push(switchService);
+        this.log.info(`Switch created: ${switchConfig.name}`);
+      }
     }
 
     this.informationService = new Service.AccessoryInformation();
