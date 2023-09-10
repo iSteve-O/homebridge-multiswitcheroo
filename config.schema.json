@@ -1,0 +1,98 @@
+{
+	"pluginAlias": "MultiSwitcheroo",
+	"pluginType": "accessory",
+	"singular": false,
+	"schema": {
+		"type": "object",
+		"properties": {
+			"accessory": {
+				"title": "MultiSwitcheroo",
+				"type": "string",
+				"required": true,
+				"placeholder": "MultiSwitcheroo",
+				"default": "MultiSwitcheroo",
+				"description": "The type of acccessory must be MultiSwitcheroo."
+			},
+			"name": {
+				"type": "string",
+				"title": "Main Switch Name",
+				"required": true,
+				"description": "The name of the main multi-switch device for HomeKit."
+			},
+			"manufacturer": {
+				"type": "string",
+				"title": "Manufacturer",
+				"required": false,
+				"description": "Name of the manufacturer in HomeKit."
+			},
+			"model": {
+				"type": "string",
+				"title": "Model",
+				"required": false,
+				"description": "Name of the model in HomeKit."
+			},
+			"serialNumber": {
+				"type": "string",
+				"title": "Serial Number",
+				"required": false,
+				"description": "Serial number displayed in HomeKit."
+			},
+			"firmwareRevision": {
+				"type": "string",
+				"title": "Firmware Revision",
+				"required": false,
+				"description": "Firmware version displayed in HomeKit. HomeKit expects Semantic Versioning, ie. `1.0.0` or `23.24.16-beta`, & does not display the pre-release or build metadata, ie. will show 23.24.16",
+				"pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?$"
+			},
+			"statusUrl": {
+				"type": "string",
+				"title": "Status URL",
+				"required": true,
+				"description": "URL to call for status response using GET."
+			},
+			"pollingInterval": {
+				"type": "integer",
+				"title": "Polling Interval (Miliseconds)",
+				"description": "Polling interval for status URL.",
+				"required": true,
+				"placeholder": 3000,
+				"default": 3000
+			},
+			"switches": {
+				"type": "array",
+				"title": "Included Switches",
+				"description": "Array of switches to be exposed under one MultiSwitcheroo.",
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": {
+							"title": "Name",
+							"type": "string",
+							"required": true,
+							"description": "Name of the switch."
+						},
+						"onUrl": {
+							"title": "On URL",
+							"type": "string",
+							"required": true,
+							"description": "URL to call using GET request when turned On."
+						},
+						"offUrl": {
+							"title": "Off URL",
+							"type": "string",
+							"required": true,
+							"description": "URL to call using GET request when turned Off."
+						},
+						"statusPattern": {
+							"title": "Status Pattern",
+							"type": "string",
+							"format": "regex",
+							"required": true,
+							"description": "regexp string to parse from statusURL response to get status."
+						}
+					}
+				}
+			}
+		}
+	}
+}
