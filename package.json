@@ -35,5 +35,9 @@
   },
   "bugs": {
     "url": "https://github.com/iSteve-O/homebridge-multiswitcheroo/issues"
+  },
+  "funding": {
+    "type" : "paypal",
+    "url" : "https://paypal.me/STrenchard"
   }
 }
