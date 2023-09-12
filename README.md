@@ -2,6 +2,7 @@
   <a href="https://homebridge.io"><img src="https://raw.githubusercontent.com/homebridge/branding/master/logos/homebridge-color-round-stylized.png" height="140"></a>
 </p>
 
+[![verified-by-homebridge](https://badgen.net/badge/homebridge/verified/purple)](https://github.com/homebridge/homebridge/wiki/Verified-Plugins)
 [![npm version](https://badgen.net/npm/v/homebridge-multiswitcheroo)](https://www.npmjs.com/package/homebridge-multiswitcheroo)
 [![npm downloads](https://badgen.net/npm/dt/homebridge-multiswitcheroo)](https://www.npmjs.com/package/homebridge-multiswitcheroo)
 
