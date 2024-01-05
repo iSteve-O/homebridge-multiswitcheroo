@@ -85,7 +85,7 @@ class MultiSwitcheroo {
   setOn(on, callback, switchConfig) {
     axios.get(on ? switchConfig.onUrl : switchConfig.offUrl, { rejectUnauthorized: false })
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === 200 || response.status === 204) {
           callback(null);
         } else {
           this.log.warn(`ERROR SETTING ${switchConfig.name}, CODE: ${response.status}`);
@@ -108,7 +108,7 @@ class MultiSwitcheroo {
 
     axios.get(this.config.statusUrl, { rejectUnauthorized: false })
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === 200 || response.status === 204) {
           
           const statusData = JSON.stringify(response.data); // Parse the response data
           const isOn = !!statusData.match(switchConfig.statusPattern);
