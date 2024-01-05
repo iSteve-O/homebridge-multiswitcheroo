@@ -2,10 +2,13 @@
   <a href="https://homebridge.io"><img src="https://raw.githubusercontent.com/homebridge/branding/master/logos/homebridge-color-round-stylized.png" height="140"></a>
 </p>
 
+[![verified-by-homebridge](https://badgen.net/badge/homebridge/verified/purple)](https://github.com/homebridge/homebridge/wiki/Verified-Plugins)
 [![npm version](https://badgen.net/npm/v/homebridge-multiswitcheroo)](https://www.npmjs.com/package/homebridge-multiswitcheroo)
 [![npm downloads](https://badgen.net/npm/dt/homebridge-multiswitcheroo)](https://www.npmjs.com/package/homebridge-multiswitcheroo)
 
 # **MultiSwitcheroo**
+
+<a href="https://github.com/iSteve-O/homebridge-multiswitcheroo"><img src="https://github.com/iSteve-O/homebridge-multiswitcheroo/blob/b9bd89d218ac9a46e090f4218a7abb23c4fa63bd/multiswitcheroo.png" height="140"></a>
 
 ### homebridge-multiswitcheroo
 </br>
@@ -32,7 +35,7 @@ Define your `MultiSwitcheroo` with whatever `name` you want to appear as the mai
 
 Then, set the appropriate `statusUrl` to call for the status at the set `pollingInterval` (default `3000`).
 
-The `statusPattern` is a regular expression string (regex) sought in the response from the server to get an accurate status for each switch (see the `Mute` switch in the `MultiSwitcheroo` config example below for a really good example of a complex pattern where an unknown number is present in the string).
+The `statusPattern` is a regular expression string (regex) sought in the response from the server to get an accurate status for each switch (see the `Mute` switch in the `MultiSwitcheroo` config example below for a really good example of a complex pattern where an unknown number is present in the string). Remember you must esacape any special characters (including spaces) with a `\`.
 
 Set the `onUrl` & `offUrl` as appropriate for each switch. Must be the full URL, including `http://` & port.
 

@@ -13,7 +13,13 @@ All notable changes to this project will be documented in this file.
 
 </br>
 
+
 # Changelog
+## [3.0.3] - 2024-01-05
+### Fixed
+- Updated code to accept code `204` as success.
+
+
 ## [3.0.2] - 2023-09-06
 ### Fixed
 - Added check for valid config before creating switches.
